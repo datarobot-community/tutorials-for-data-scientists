@@ -19,6 +19,8 @@ Each use-case directory contains instructions for its own use.
 
 [Lithofacies and One vs Rest with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/one-vs-rest-with-datarobot)
 
+[Monitoring Drift and Replacing Model](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Monitoring%20Drift%20and%20Replacing%20Model)
+
 **R** 
 
 [Detecting Droids with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/Detecting%20Droids)
