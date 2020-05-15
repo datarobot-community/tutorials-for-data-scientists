@@ -1,19 +1,31 @@
-# Learning Center Use Case Samples
+# Tutorials for Data Scientists
 
 This repository contains various use-case examples in various languages.
 Each use-case directory contains instructions for its own use.
 
 **Python**
 
-[Medical Claims Fraud](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/python/Medical_Claims_Fraud)
+[Hospital Readmissions](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predict_hospital_readmissions)
 
-[Lead Scoring](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/python/lead_scoring)
+[Medical Claims Fraud](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_fraud_medical_claims)
 
-[Predicting COVID-19 at the county level](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/python/predicting_covid_at_county_level)
+[Lead Scoring](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring)
+
+[Predicting COVID-19 at the county level](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_covid_at_county_level)
+
+[Model Factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/Python/readmissions_model_factory)
+
+[Double Pendulum with Eureqa Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Regression/Python/double_pendulum_with_eureqa/src)
 
 **R** 
 
-[Detecting Droids with DataRobot](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/R/Detecting%20Droids)
+[Detecting Droids with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/Detecting%20Droids)
+
+[Hospital Readmissions](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/predict_hospital_readmissions)
+
+[Model factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/readmissions_model_factory)
+
+[Time Series Model factory](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/time_series_model_factory)
 
 
 ## Development and Contributing
