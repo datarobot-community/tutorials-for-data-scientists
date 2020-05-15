@@ -1,0 +1,357 @@
+---
+title: ""
+output: html_document
+runtime: shiny
+author: Emily Webber
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
+
+```
+## "These are not the droids you are looking for."
+
+&nbsp;
+
+This tutorial demonstrates how to use the API to classify images and then use Shiny to create a prediction application.  This project uses the platform to classify whether images of droids contain R2D2 or BB8.  You can find this data [here](https://github.com/averdones/star_wars_object_detection).
+
+
+If you download this markdown and **add your username, Endpoint, API Token, and DataRobot Key**, then you should be able to run the code and get a document that includes an analysis and Shiny prediction App.  **Just make sure you have all of the packages installed first :) **.
+
+Below is a description of the different items you need. 
+
+
+**Your username**:  This is your login for DataRobot. 
+
+**Your Endpoint**:  This is where R and DataRobot connect.   
+
+https://app.eu.datarobot.com/api/v2 -- for EU cloud users
+https://app.datarobot.com/api/v2 -- for NA cloud users
+
+If you don’t fall into either category then ask your system administrator
+
+**Your API Key**:  If you go up to the top right of the browser to the Person Icon > Developer Tools. This will take you to a page that should contain your API tokens. 
+
+**Your DataRobot Key**: This is a key needed to use the prediction server. 
+You can find this in the Python code on the integrations tab of one of your deployments.  If you don’t have a deployment then ask your system administrator. 
+
+
+Importantly, the app you create won't be saved in the static saved HTML file output, but will be live in the markdown that pops up when you run the code.
+
+&nbsp;
+
+### Setup
+```{r }
+#Import Libraries
+library(ggplot2)
+library(datarobot)
+library(filesstrings)
+library(tidyverse)
+library(shiny)
+library(shinythemes)
+library(ggthemes)
+library("httr")
+library(jsonlite)
+library(rjson)
+library(htmltools)
+library('knitr')
+library(RCurl)
+library(base64enc)
+library(jpeg)
+library(tictoc)
+
+# Get working Directory
+directory <- getwd()
+
+```
+
+```{r }
+  
+  username= "USERNAME"
+
+  endpoint='YOUR_DR_URL/api/v2'
+  
+  token='API_TOKEN'
+  
+  datarobot_key = "DATAROBOT_KEY"
+
+
+#Connect to DataRobot
+ConnectToDataRobot(endpoint = endpoint, token = token)
+
+
+
+```
+
+
+
+
+&nbsp;
+
+### Prep GitHub Data
+
+In order to do image classification you need the training images to be in a folder with their respective labeled class.  In the case of this tutorial we are going to predict whether the droid included in the photograph is BB8 or R2D2.  The training folder should include 2 subfolders: "BB8" and "R2D2".  Each folder should contain images of the correct droid. Once you download, the next step is to zip this folder and use the filepath as your datasource for DataRobot.   
+
+For the test set you should zip a separate folder called "test_data" that includes both images of BB8 and R2D2.  You can try to classify these with your model at the end using the API, or you can just upload images into your new prediction app!  
+
+&nbsp;
+
+```{r }
+
+
+#Download files from URL
+url <-  "https://github.com/averdones/star_wars_object_detection/zipball/master/"
+download.file(url = url,  destfile = "star_wars_object_detection-master.zip")
+
+#Unzip the folder
+unzip(zipfile = "star_wars_object_detection-master.zip")
+unzipped_path <- paste0(directory, "/averdones-star_wars_object_detection-7479a3e")
+
+#Create Test and Train Directories 
+dir.create("train_folder")
+dir.create("train_folder/R2D2")
+dir.create("train_folder/BB8")
+dir.create("test_folder")
+
+#Path to Train and Test Data
+train_bb8_data <- list.files(paste0(unzipped_path, "/images"), full.names = TRUE, pattern="BB")
+train_r2d2_data <- list.files(paste0(unzipped_path, "/images"), full.names = TRUE, pattern="R2")
+test_data <- list.files(paste0(unzipped_path, "/test_images"), full.names = TRUE)
+
+#Move Files
+file.move(train_bb8_data, paste0(directory, "/train_folder/BB8" ))
+file.move(train_r2d2_data, paste0(directory, "/train_folder/R2D2" ))
+file.move(test_data, paste0(directory, "/test_folder" ))
+
+testpath <- list.files(paste0(directory, "/test_folder"), full.names = TRUE)
+
+
+#Zip Folders
+zip("train_folder.zip", c("train_folder/BB8", "train_folder/R2D2"))
+zip("test_folder.zip", testpath)
+
+train_zip <- paste0(directory, "/train_folder.zip")
+test_zip <- paste0(directory, "/test_folder.zip")
+
+```
+
+&nbsp;
+
+### Make sure your folders are set up correctly
+
+If you run the above code in the console, then in your working directory you should have: 
+
+1. The zipped and unzipped folder of what you downloaded from GitHub.
+2. The zipped and unzipped train_folder
+3. The zipped and unzipped test_folder
+
+&nbsp;
+
+```{r echo = FALSE}
+
+knitr::include_graphics(paste0(directory, '/folders.png'))
+```
+
+
+&nbsp;
+
+Alternatively, you can just try running the file and the correct folders and files should populate your working directory.
+
+&nbsp;
+
+### Run Autopilot
+Use a zipped folder of the images in the labeled folders as the dataSource.  Name the project, and indicate target as "class". 
+```{r }
+#If this is your first time running the document then you need to run the "StartProject" code.  It will create a project and build the VisualAi models. 
+
+project <- StartProject(dataSource = train_zip,
+                       projectName = "Droids",
+                      target = "class")
+
+##If you already have the models built because you ran the code, then you should comment out the "StartProject" code above and uncomment out the "GetProject" code.  This will allow you to run the file multiple times without building project every time. 
+
+#project <- GetProject('###################')
+```
+
+&nbsp;
+
+### Get list of models
+**Order by metric** - in this case we used logloss.  We put a "-" in front of "metric" so that the models would be listed from lowest to highest rather than the reverse.  This is because logloss goes down as the model improves and we wanted our best model at the top of the list 
+```{r }
+models = ListModels(project, orderBy = '-metric')
+```
+
+&nbsp;
+
+### Select Best Model
+```{r }
+model <- models[[1]]
+summary(model)
+```
+&nbsp;
+
+### Get Validation Scores
+
+&nbsp;
+
+**LogLoss**
+```{r }
+val <- model$metrics$LogLoss
+
+val <- select(val, validation, crossValidation, holdout)
+kable(val)
+```
+&nbsp;
+
+**AUC**
+```{r warnings = FALSE }
+auc <- model$metrics$AUC
+auc <- select(auc, validation, crossValidation, holdout)
+kable(auc)
+```
+&nbsp;
+
+**ROC Curve**
+```{r warnings = FALSE, comments = FALSE }
+ROC <- GetRocCurve(model, source = DataPartition$VALIDATION,
+fallbackToParentInsights = FALSE)
+
+ROC2 <- as.data.frame(ROC$rocPoints)
+
+ggplot(ROC2, aes(x=falsePositiveRate, y=truePositiveRate)) +
+  geom_line(color = "#2D8FE2")+
+  theme_classic() +
+  labs(title= "ROC Curve") + 
+  geom_text(x=0.75, y=0.35, label=paste0("AUC: ", auc$validation))
+```
+&nbsp;
+**Get Prediction Server ID** 
+```{r }
+#List Prediction Servers
+ListPredictionServers()
+pred_server_list <- ListPredictionServers()
+#Select prediction server you want to use
+pred_server_id <- pred_server_list[[1]]$id
+```
+
+**Create Deployment**
+```{r }
+CreateDeployment(model, label = "droid_classifier_demo", defaultPredictionServerId = pred_server_id)
+
+#once you've created a deployment, you can just connect to the original using the deployment ID rather than making a new one every time, you an find this in the URL of the deployment. 
+#deployment_id <- "deploymnet_id"  
+```
+
+**List Deployments**
+```{r }
+#List Deployments
+deploy_list <- ListDeployments()
+# create function to unpack list of deployments and pull id and start date
+unpack_func <- function(i) {
+  unpack <- deploy_list[[i]]
+  deployment_id <- unpack$id
+  label <- unpack$label
+  output <- data.frame(deployment_id, label)
+  return(output)
+}
+# map over function and convert to df
+deployments <- map(1:length(deploy_list), unpack_func) %>% 
+  bind_rows()
+
+
+deployment_id <- deployments[deployments$label == "droid_classifier_demo", ]
+deployment_id <- deployment_id$deployment_id[1]
+
+```
+
+
+### Set up deployment endpoint
+```{r }
+api_url <- "YOUR_DEPLOYMENT_ENDPOINT"  #FIND THIS IN YOUR DEPLOYMENT OR ASK SYSTEM ADMIN
+pred_endpoint <- "/predApi/v1.0/deployments/"
+```
+
+
+### Create Prediction Function for Images
+```{r }
+URL		<- paste0(api_url, "/predApi/v1.0/deployments/", deployment_id, "/predictions")
+
+my_function<- function(x){
+  y <- as.data.frame(x)
+  colnames(y) <- "image"
+  write.csv(y, file = "Image_Pred.csv", row.names = FALSE)
+  path <- paste0(directory, "/Image_Pred.csv")
+  r <- POST(URL, body = upload_file(path), type = "text/plain; encoding=UTF-8",
+           add_headers("datarobot-key" = datarobot_key),
+           authenticate(username, token, type = "basic"))
+  body <- fromJSON(content(r, "text", encoding = "UTF-8"))
+  body$data[[1]]$prediction
+}
+```
+
+### Create Shiny App
+
+```{r }
+ui <- fluidPage(
+ theme = shinytheme("flatly"),
+  
+    titlePanel("Make a Prediction!"),
+    
+    fileInput("upload", " ", accept = "image/jpg"),
+       textOutput("base"),
+        tags$head(tags$style("#base{color: #53718F;
+                             font-size: 20px;
+                         font-style: bold;
+                         }"
+                     )),
+    uiOutput('image'))
+
+server <- function(input, output){
+  
+base64 <- reactive({
+    inFile <- input[["upload"]]
+    if(!is.null(inFile)){
+      dataURI(file = inFile$datapath, mime = "image/jpg")
+    }
+  })
+
+  output[["image"]] <- renderUI({
+    if(!is.null(base64())){
+      tags$div(
+        tags$img(src= base64(), width="30%"),
+        style = "width: 400p
+        x;"
+      )
+    }
+  })
+  
+  output[["base"]] <- renderText({
+    if(!is.null(base64())){
+    imag <- sub('.*,', '', base64())
+    paste0("My name is: ",
+    my_function(imag))
+      
+      }
+  })
+
+}    
+
+shinyApp(ui = ui, server = server)
+```
+&nbsp;
+
+### More Fun w/ Images
+
+1. Use the application you created on the test images to see how your model performed. 
+
+2. Once you have done that, start trying out pictures that really test the generalizability of your model. For example, the author uploaded pictures of dogs wearing droid costumes and other not-quite-right images to see if the model would still perform. 
+
+&nbsp;
+
+```{r echo = FALSE}
+knitr::include_graphics(paste0(directory, '/example.png'))
+```
+
+&nbsp;
+
+**If you are getting an error on the prediction that says "missing_columns" then you are connected to the wrong deployment**  Just go to the "List Deployments" chunk and comment-out the list logic and uncomment the code that directly defines the deployment id.  You can find this in the URL of your deployment "droid_classifier_demo".  You can also do this once you run the project once, so that you don't keep making new deployments with each run.  

@@ -1,27 +1,20 @@
-# PROJECT TITLE
+# Learning Center Use Case Samples
 
-TODO: Add a short description of the project.
-It should include the following:
-- What this repository is
-- Who is it for
-- What are the dependencies 
+This repository contains various use-case examples in various languages.
+Each use-case directory contains instructions for its own use.
 
-## Usage
+**Python**
 
-TODO: Specify how to use this project
-This can include running the scripts, or where to find API docs if it's a library, command line tool, or similar.
+[Medical Claims Fraud](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/python/Medical_Claims_Fraud)
 
-## Repository Contents
+[Lead Scoring](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/python/lead_scoring)
 
-TODO: Specify what this repository contains, for example if it contains multiple self contained sub-projects, like with Notebooks scripts that can be used independently.
+[Predicting COVID-19 at the county level](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/python/predicting_covid_at_county_level)
 
-In some cases you can skip this section.
+**R** 
 
-## Setup/Installation
+[Detecting Droids with DataRobot](https://github.com/emilyswebber/learning-center-use-case-samples/tree/master/R/Detecting%20Droids)
 
-TODO: Specify what's required to set this project up for usage
-
-In some cases you can skip this section.
 
 ## Development and Contributing
 
