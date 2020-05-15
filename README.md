@@ -17,7 +17,7 @@ Each use-case directory contains instructions for its own use.
 
 [Double Pendulum with Eureqa Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Regression/Python/double_pendulum_with_eureqa/src)
 
-[Lithofacies and One vs Rest with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/tree/master/Multiclass%20Classification/one-vs-rest-with-datarobot)
+[Lithofacies and One vs Rest with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/one-vs-rest-with-datarobot)
 
 **R** 
 
