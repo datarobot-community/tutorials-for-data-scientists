@@ -344,7 +344,7 @@ shinyApp(ui = ui, server = server)
 
 1. Use the application you created on the test images to see how your model performed. 
 
-2. Once you have done that, start trying out pictures that really test the generalizability of your model. For example, the author uploaded pictures of dogs wearing droid costumes and other not-quite-right images to see if the model would still perform. 
+2. Once you have done that, start trying out pictures that really test the generalizability of your model. For example, do a search for pets in droid costumes, or products with droid themes like R2D2 mugs. Put these into your app and see how it performs!
 
 &nbsp;
 
