@@ -1,0 +1,53 @@
+################################################################################
+# data and use case setup
+################################################################################
+
+# location of input file
+dataset: '../data/australian_cases.csv'
+# storage of deployment and project ids -
+# in production this shouldn't be a text file
+ref_file: '../reference.csv'
+# location of output predictions
+out_file: '../data/scores.csv'
+
+# columns
+timecol: 'date'
+target: 'cases'
+series: 'Province/State'
+
+# restrict modelling to certain series
+filter: ['New South Wales', 'Victoria', 'Queensland', 'South Australia']
+
+################################################################################
+# project setup
+################################################################################
+
+# project metric
+metric: 'MAE'
+# number of backtests for a timeseries project
+backtests: 2
+# length in units for backtests
+backtest_length: 7
+# historical time period for feature derivation
+fdw: -14
+# forecast window
+horizon: 3
+# number of records to upload for predictions (considering fdw and differencing)
+history: 28
+
+################################################################################
+# deployment info
+################################################################################
+
+description: 'Australian Coronavirus cases'
+
+################################################################################
+# retraining configuration
+################################################################################
+
+# number of days to use for accuracy calculations
+accuracy_days: 3
+# whether autopilot should be used when retraining
+run_autopilot: False
+# if autopilot is not used, how many models to train
+n_models: 5

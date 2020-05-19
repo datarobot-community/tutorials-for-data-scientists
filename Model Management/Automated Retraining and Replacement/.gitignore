@@ -1,0 +1,3 @@
+*.csv
+*.swp
+__pycache__
