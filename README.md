@@ -36,6 +36,7 @@ Each use-case directory contains instructions for its own use.
 [Time Series Model factory](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/time_series_model_factory)
 
 **Integrations**
+
 [Integration with AWS](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/integrations/AWS%20(Amazon%20Web%20Services))
 
 ## Development and Contributing
