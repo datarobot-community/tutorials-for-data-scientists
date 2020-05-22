@@ -1,3 +1,5 @@
+Author: Jesse Wu
+
 # auto_retrain
 
 This repository is intended to be used as a starting template to setup a basic pipeline to automatically replace models.
