@@ -15,11 +15,15 @@ Each use-case directory contains instructions for its own use.
 
 [Model Factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/Python/readmissions_model_factory)
 
+[Model Factory for Time Series and Sales Store Data](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/Python/time_Series_store_sales_model_factory)
+
 [Double Pendulum with Eureqa Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Regression/Python/double_pendulum_with_eureqa/src)
 
 [Lithofacies and One vs Rest with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/one-vs-rest-with-datarobot)
 
 [Monitoring Drift and Replacing Model](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Monitoring%20Drift%20and%20Replacing%20Model)
+
+[Automated Retraining and Replacement of Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Automated%20Retraining%20and%20Replacement)
 
 **R** 
 
@@ -31,6 +35,8 @@ Each use-case directory contains instructions for its own use.
 
 [Time Series Model factory](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/time_series_model_factory)
 
+**Integrations**
+[Integration with AWS](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/integrations/AWS%20(Amazon%20Web%20Services))
 
 ## Development and Contributing
 
