@@ -58,9 +58,8 @@ def make_timeseries_prediction(data,
                                forecast_point=None):
     """
     Make predictions on data provided using DataRobot deployment_id provided.
-    See docs for details:
-         https://app.datarobot.com/docs/users-guide/predictions/api/new-prediction-api.html
- 
+    See docs for details by searching "New prediction api"
+    
     Parameters
     ----------
     data : str
@@ -70,11 +69,6 @@ def make_timeseries_prediction(data,
         The ID of the deployment to make predictions with.
     forecast_point : str, optional
         The as of timestamp in ISO format
- 
-    Returns
-    -------
-    Response schema:
-        https://app.datarobot.com/docs/users-guide/predictions/api/new-prediction-api.html#response-schema
  
     Raises
     ------
