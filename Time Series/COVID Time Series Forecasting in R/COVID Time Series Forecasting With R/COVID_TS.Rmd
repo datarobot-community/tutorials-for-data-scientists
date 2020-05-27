@@ -1,0 +1,226 @@
+---
+title: "Forecasting US COVID-19 Cases Using Time-Series R DataRobot Functionality"
+output: html_notebook
+---
+
+This code shows you how to access Time-Series DataRobot functionality in R.  It uses file time_series_covid19_confirmed_global_narrow.csv located in https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases
+
+The process shows each steps from 1. cleaning and preparing the dataset; 2. creating projects and auto-running them in DataRobot; to 3. forecasting.  Three countries are used as example in here: US, France, and Spain 
+
+
+```{r}
+library(readr)
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(quantmod)
+library(datarobot)
+```
+*Clean and Prepare Dataset for Modeling*
+
+Two functions are needed:
+    1. CleanData takes the original dataset and escape the first row (which is a description row), removes Province feature, which is located in column 1, and change timestamp to date.
+    2. PrepareDataForTraining function does the followings:
+         a. aggregate the total number of cases (total confirmed by country and date).  
+         b. remove rows where total_confirmed is 0
+         c. calculate number of days since the first case in the world
+         d. calculate number of new cases, arithmetic and log percentage change, number of days since the first case for a given country
+         e. calculate cumulative log percentage 
+         
+```{r}
+
+CleanData <- function(tmp_df) {
+     data_long <- tmp_df[2:nrow(tmp_df),2:6]
+     names(data_long) <-   c("country","Lat","Long","timestamp","total_confirmed")
+     data_long$total_confirmed <- as.numeric(data_long$total_confirmed)
+      # Just in case you date looks like this 04/23/20 
+      #data_long$timestamp <- as.POSIXct(data_long$timestamp,
+      #format =  "%m/%d/%y")
+     data_long$timestamp <- as.POSIXct(data_long$timestamp)
+     return (data_long)
+}
+#Prepare the dataset for modeling
+PrepareDataForTraining <- function(tmp_df) {
+      #Sum up the total number of cases for each country
+     COVID_country <- tmp_df %>% group_by(country,timestamp) %>% 
+        summarize(total_confirmed = sum(total_confirmed))
+      #Make sure to remove dates before the 1 case
+      COVID_country <- subset(COVID_country, total_confirmed != 0)
+      #Calculate the number of days since the first World Case
+      tmp_c2 <- COVID_country
+      tmp_c2$DateFromStart <- as.Date(as.character(tmp_c2$timestamp), 
+          format="%Y-%m-%d")- as.Date(as.character("2019-11-01"), 
+          format="%Y-%m-%d")
+      #For each country, calculate daily number of new cases, logarithmic
+      #change    (Change_prcn), arithmetic change (Change_prcn_arth), and
+      #number of days since the first case in that country (numbDays)
+      tmp_c2 <- tmp_c2 %>% arrange(country,timestamp) %>%
+            group_by(country) %>% 
+            mutate(newCases = ifelse(is.na(lag(total_confirmed)),1, 
+                   total_confirmed- lag(total_confirmed, default = 0)),
+                   Change_prcn = Delt(total_confirmed,type="log"),
+                   Change_prcn_arth =  Delt(total_confirmed,type="arithmetic"),
+                   numbDays = 1:n())
+      #Change the missing values to 0
+      tmp_c2$Change_prcn_arth <- ifelse(is.na(tmp_c2$Change_prcn_arth),0,
+                                    tmp_c2$Change_prcn_arth)
+      tmp_c2$Change_prcn <-  ifelse(is.na(tmp_c2$Change_prcn),0,tmp_c2$Change_prcn)
+#Calculate the cumulative logarithmic change
+      tmp_c2 <- tmp_c2 %>% arrange(country,timestamp) %>% 
+             group_by(country) %>% 
+             mutate(cum_prod = cumprod(1+ Change_prcn_arth))
+      return(tmp_c2)
+}
+
+```
+*Read the dataset, clean it, and add features*
+```{r}
+#Prepare dataset
+filename <- "time_series_covid19_confirmed_global_narrow.csv"
+time_series_19_covid_Confirmed <- read_csv(filename)
+COVID_Clean <- CleanData(time_series_19_covid_Confirmed)
+COVID_Clean <-  PrepareDataForTraining(COVID_Clean)
+
+```
+
+
+Decide which features to use for modeling, and prepare a dataframe to contain the name of the countries, their project ID, and their best respective models
+```{r}
+feature2keep <- c("timestamp","total_confirmed","DateFromStart",
+       "newCases","Change_prcn","numbDays") 
+countriesModels <- data.frame("country"= 
+   c("France","Spain","US"),"projectId"="","modelId"="","id" = c(1,2,3))
+
+```
+*Create Projects and Automatically Build Models*
+
+For each country in countriesModels create and build models in DataRobot.  
+1.  For Time-series, create a partition, with date set, forecastWindowStart and forecastWindowEnd equal to 1 day forward forcast, and useTimeSeries equal to 1.
+2.  For each country, create and start a project.  Make sure to set up the target to total_confirmed, partition to partition, and mode to AutopilotMode$FullAuto (you can change this to Quick, or Manual).  In case of manual you will need to choose from the repository a model.  Finally, you don't need to decide on your target type.  DataRobot infers from the target characteristic if the target is "continuous" or categorical.  Still in this case, I decided to set it up to "Regression"
+```{r}
+ModelTrain<- function(countriesModels,COVID_Clean,feature2keep) {
+     partition <- 
+    CreateDatetimePartitionSpecification(datetimePartitionColumn =
+ 	  "timestamp",
+    forecastWindowStart = 1,
+    forecastWindowEnd = 1,
+    useTimeSeries = TRUE)
+              #I would like to create 3 projects and make sure to keep track of the projects id.
+    projects <- c()
+    n_rows <- nrow(countriesModels)
+    for ( i in 1:n_rows) {
+        country2model <- subset(COVID_Clean, country == 
+        countriesModels$country[i])
+        country2model <- country2model[,feature2keep]
+        project <- StartProject(dataSource =country2model, 
+        projectName= as.character(countriesModels$country[i]),
+                        target = "total_confirmed", 
+                        partition = partition,
+                        mode = AutopilotMode$FullAuto,
+                        targetType = "Regression")
+         projects <- c(projects, project$projectId)
+      }
+      return(projects)
+}
+
+```
+
+Connect to your DataRobot instance with your token.  You can find your token in Developer Tools under the human icon. Your endpoint hostname is your datarobot installation. 
+```{r}
+#Run this line to get the project Id for each country
+credentials = "YOUR_TOKEN"
+ConnectToDataRobot(endpoint = "https://YOUR_DATAROBOT_HOSTNAME/api/v2", token = credentials)
+countriesModels$projectId<- ModelTrain(countriesModels,COVID_Clean,
+feature2keep)
+
+```
+
+If you go to the DataRobot GUI, you will notice that models are been created.  You can access the best models by accessing from the project using ListModelRecommendations the most accurate model which is in list 1
+```{r}
+GetProjectBestModels<- function(countriesModels){
+     n_rows <- nrow(countriesModels)
+     models <- c()
+     for (i in 1:n_rows){
+		     tp_project <- countriesModels$projectId[i]
+		     models <- append(models, 
+              	ListModelRecommendations(tp_project)[[1]]$modelId)
+      }
+      return(models)
+}
+#Get the best performing model
+countriesModels$modelId <- GetProjectBestModels(countriesModels)
+
+```
+```{r}
+nrow(countriesModels)
+```
+
+Now, the dataframe countriesModels is ready.  It has the name of the countries, I'm interested in, their respective projects and the best models DataRobot built for each project
+
+```{r}
+countriesModels
+```
+
+
+*Forecasting*
+
+calculate_Forecasting:  Forecast days2Forecast for a given country, the country dataset, dataframe of countries project and model (modelsBuilt), and index of models to choose from modelsBuilt
+```{r}
+calculate_Forecasting<- function(c_name,df_Country, 
+             modelsBuilt,modelid,days2Forcast) {
+     #Prepare the data for forecasting
+     df_result <- df_Country
+     #Get the starting and ending date for forecasting
+     start_date <- as.Date(max(df_result$timestamp))+1
+     end_date <- as.Date(start_date)+days2Forcast-1
+     start_date <- substr(as.character(start_date),1,10)
+     end_date <- substr(as.character(end_date),1,10)
+     #Make sure to add in the temporary df_result the country
+     df_result$country <- c_name
+     #Get the model Id
+     bestModel <- GetModel(modelsBuilt$projectId[modelid], 
+       modelsBuilt$modelId[modelid])
+     #Go through each day, make a prediction, put the prediction after making
+     # sure to update other features into df_result
+     kdate <- seq(as.POSIXct(start_date), as.POSIXct(end_date), "days")
+     for (k in 1:length(kdate)) {
+         result <- 0
+         result <- Predict(bestModel,df_result[1:nrow(df_result),])
+         #Update Values
+         #Take the latest observation from df_result
+         tmpUS = df_result[nrow(df_result),]
+         #Create a temporary data frame that has the exact features as df_result
+         # and make sure to populate it so other features are up to date 
+         tmp <- data.frame("country" = c_name,
+                      "timestamp"= kdate[k],
+                      "total_confirmed"= result,
+                      "DateFromStart" = tmpUS$DateFromStart +1,  
+                      "newCases" = result - tmpUS$total_confirmed , 
+                      "Change_prcn" = log(result/tmpUS$total_confirmed),
+                      "numbDays" =   tmpUS$numbDays+1)
+         tmp$country <- as.character(tmp$country)
+         df_result <-bind_rows(df_result,tmp)
+      }
+      return(df_result)
+}
+
+```
+
+
+Now, forecast 10 days ahead total number of cases for each country in countriesModels by calling calculate_Forecasting.  
+```{r}
+n_rows <- nrow(countriesModels)
+n_days_forecast <- 5
+forecast_df <- data.frame()
+for (i in 1:n_rows) {
+    country2model <- subset(COVID_Clean, country == countriesModels$country[i])
+    country2model <- country2model[,feature2keep]
+    tmp_prediction <-  
+         calculate_Forecasting(countriesModels$country[i],country2model, 
+               countriesModels, i,n_days_forecast)
+    tmp_prediction$country <- countriesModels$country[i]
+    forecast_df <- bind_rows(forecast_df,tmp_prediction)
+}
+write_csv(forecast_df, "COVID_Forecast4.csv")
+```
+
