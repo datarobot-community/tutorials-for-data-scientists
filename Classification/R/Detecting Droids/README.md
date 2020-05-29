@@ -1,5 +1,6 @@
 # Tutorial - Predicting Droids
 
+This code accompanies a community article which can be found [in this article on DataRobot Community](https://community.datarobot.com/t5/resources/detecting-droids-with-r-and-datarobot/ta-p/5081/jump-to/first-unread-message).
 This folder contains two folders. 
 
 "Droids Demo" contians a markdown document and 2 images.  Use this markdownfile to create your own droid detection model and Shiny app! 
