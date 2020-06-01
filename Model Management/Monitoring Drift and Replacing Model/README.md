@@ -1,6 +1,6 @@
 # Model monitoring: data drift detection
 
-Scope: The scope of this notebook is to provide instructions on how to detect data drift and replace the model in the deployment.
+Monitoring Drift and Replacing Model - An example for how you can start to setup an automated continious training pipeline. 
 
 Background: The model performance depends on the data used for predictions. Data drift can lead to unreliable predictions which is why it should be monitored to the model replacement.
 

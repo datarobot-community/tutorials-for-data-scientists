@@ -1,6 +1,6 @@
 # Tutorial - Using Scoring Code Models with Sagemaker
 
-This repository contains a sample script accompanying a [tutorial on the DataRobot Community]().
+This repository contains a sample script accompanying a [tutorial on the DataRobot Community](https://community.datarobot.com/t5/resources/using-scoring-code-models-with-aws-sagemaker/ta-p/5558).
 
 ## Usage
 

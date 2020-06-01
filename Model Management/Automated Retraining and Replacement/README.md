@@ -1,5 +1,7 @@
 Author: Jesse Wu
 
+Automated Retraining and Replacement of Models - An example for how you can start to setup an automated continious training pipeline. 
+
 # auto_retrain
 
 This repository is intended to be used as a starting template to setup a basic pipeline to automatically replace models.

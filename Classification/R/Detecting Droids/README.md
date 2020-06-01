@@ -1,5 +1,7 @@
 # Tutorial - Predicting Droids
 
+Detecting Droids with DataRobot - An end to end example of using Visual AI to detect images.  The final results are shown using a R shiny app.
+
 This code accompanies a community article which can be found [in this article on DataRobot Community](https://community.datarobot.com/t5/resources/detecting-droids-with-r-and-datarobot/ta-p/5081/jump-to/first-unread-message).
 This folder contains two folders. 
 
