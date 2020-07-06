@@ -4,7 +4,7 @@ Predicting county's with COVID using a look-a-like modeling approach. This is a 
 
 ## Usage
 
-Open `Covid_blog.ipynb`, follow the steps.
+Open `src/Covid_blog.ipynb`, follow the steps.
 
-You can also review dataset we used along in the notebook - `trainDatawithAirports.csv`.
+You can also review the dataset we used along in the notebook - `trainDatawithAirports.csv`.
 
