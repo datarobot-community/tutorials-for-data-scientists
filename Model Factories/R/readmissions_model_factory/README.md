@@ -26,5 +26,5 @@ target and choose the model at the top of the leaderboard. This logic is easily 
 
 ### Instructions
 
-The script [readmissions_model_factory.R](scripts/standard_example.R) shows how to run a model factory for a classification or regression project.
+The script [readmissions_model_factory.R](src/standard_example.R) shows how to run a model factory for a classification or regression project.
 
