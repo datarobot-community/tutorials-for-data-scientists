@@ -26,4 +26,4 @@ target and choose the model at the top of the leaderboard. This logic is easily 
 
 ### Instructions
 
-The script [time_series_model_factory.R](scripts/timeseries_example.R) shows how to do it for a time series project.
+The script [time_series_model_factory.R](src/timeseries_example.R) shows how to do it for a time series project.
