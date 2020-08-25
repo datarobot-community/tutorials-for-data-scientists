@@ -1,8 +1,8 @@
 Author: Jesse Wu
 
-Automated Retraining and Replacement of Models - An example for how you can start to setup an automated continious training pipeline. 
+# Automated Retraining and Replacement of Models - An example for how you can start to setup an automated continious training pipeline. 
 
-# auto_retrain
+### auto_retrain
 
 This repository is intended to be used as a starting template to setup a basic pipeline to automatically replace models.
 
@@ -17,7 +17,7 @@ This project was set up in April 2020, as daily case numbers were being updated.
     * retrain and redeploy if recent performance exceeds a threshold
 * make predictions for the next day
 
-## Installation
+### Installation
 
 Prerequisites: python installed, DataRobot account, cron
 
@@ -30,7 +30,7 @@ Update your API token and install location
 pip install -r requirements.txt
 ```
 
-## Running
+### Running
 
 This template uses a number of python scripts to interact with the DataRobot API.
 These scripts utilize a yaml config file `usecase_config.yaml`,
@@ -61,3 +61,6 @@ We recommend editing these to suit your use case, and once done, add these lines
 
 These scripts all source your bash profile before running, to emulate your user environment.
 Change as necessary.
+
+### Problem Type
+Model Management

@@ -9,7 +9,9 @@ This folder contains two folders.
 
 "toy_test_images" contains a set of images taken of toy versions of R2D2 and BB8. 
 
-## Usage
+### Getting Started
 
 Open `Droids_R.Rmd`, follow the steps.
 
+### Problem Type
+Binary Classifications

@@ -1,7 +1,12 @@
 # Tutorials for Data Scientists
 
-This repository contains various use-case examples in various languages.
-Each use-case directory contains instructions for its own use.
+This repository contains various end to end use-case examples using the DataRobot API. Each use-case directory contains instructions for its own use.
+
+## Important Links
+
+- To learn to use DataRobot, visit [DataRobot University](https://university.datarobot.com/)
+- For General articles on DataRobot and news, visit [DataRobot Community](https://community.datarobot.com/)
+- Simple example scripts [Examples for Data Scientists](https://github.com/datarobot-community/examples-for-data-scientists)s
 
 **Python**
 
@@ -9,7 +14,9 @@ Each use-case directory contains instructions for its own use.
 
 [Medical Claims Fraud](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_fraud_medical_claims)
 
-[Lead Scoring](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring)
+[Lead Scoring Ecommerce](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring)
+
+[Lead Scoring Banking](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring_bank_marketing)
 
 [Predicting COVID-19 at the county level](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_covid_at_county_level)
 
@@ -34,6 +41,8 @@ Each use-case directory contains instructions for its own use.
 [Model factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/readmissions_model_factory)
 
 [Time Series Model factory](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/time_series_model_factory)
+
+[Lead Scoring Banking](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/lead_scoring_bank_marketing)
 
 **Integrations**
 
