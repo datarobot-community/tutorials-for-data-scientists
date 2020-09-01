@@ -10,39 +10,39 @@ This repository contains various end to end use-case examples using the DataRobo
 
 **Python**
 
-[Hospital Readmissions](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predict_hospital_readmissions)
+[Hospital Readmissions](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predict_hospital_readmissions) (Binary Classification)
 
-[Medical Claims Fraud](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_fraud_medical_claims)
+[Medical Claims Fraud](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_fraud_medical_claims) (Binary classification)
 
-[Lead Scoring Ecommerce](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring)
+[Lead Scoring Ecommerce](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring) (Binary Classification)
 
-[Lead Scoring Banking](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring_bank_marketing)
+[Lead Scoring Banking](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/lead_scoring_bank_marketing)(Binary Classification)
 
-[Predicting COVID-19 at the county level](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_covid_at_county_level)
+[Predicting COVID-19 at the county level](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/Python/predicting_covid_at_county_level) (Binary Classificaiton)
 
-[Model Factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/Python/readmissions_model_factory)
+[Model Factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/Python/readmissions_model_factory) (Model Factory, Binary Classification)
 
-[Model Factory for Time Series and Sales Store Data](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/Python/time_Series_store_sales_model_factory)
+[Model Factory for Time Series and Sales Store Data](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/Python/time_Series_store_sales_model_factory) (Model Factory, Time Series Regression)
 
-[Double Pendulum with Eureqa Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Regression/Python/double_pendulum_with_eureqa/src)
+[Double Pendulum with Eureqa Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Regression/Python/double_pendulum_with_eureqa/src) (Regression)
 
-[Lithofacies and One vs Rest with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/one-vs-rest-with-datarobot)
+[Lithofacies and One vs Rest with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/one-vs-rest-with-datarobot) (Multiclass)
 
-[Monitoring Drift and Replacing Model](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Monitoring%20Drift%20and%20Replacing%20Model)
+[Monitoring Drift and Replacing Model](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Monitoring%20Drift%20and%20Replacing%20Model) (Model Management)
 
-[Automated Retraining and Replacement of Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Automated%20Retraining%20and%20Replacement)
+[Automated Retraining and Replacement of Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Automated%20Retraining%20and%20Replacement) (Model Management)
 
 **R** 
 
-[Detecting Droids with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/Detecting%20Droids)
+[Detecting Droids with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/Detecting%20Droids) (Image, Binary Classification)
 
-[Hospital Readmissions](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/predict_hospital_readmissions)
+[Hospital Readmissions](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/predict_hospital_readmissions) (Binary Classification)
 
-[Model factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/readmissions_model_factory)
+[Model factory with Readmissions Dataset](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/readmissions_model_factory)(Model Factory)
 
-[Time Series Model factory](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/time_series_model_factory)
+[Time Series Model factory](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Factories/R/time_series_model_factory) (Time Series Regression)
 
-[Lead Scoring Banking](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/lead_scoring_bank_marketing)
+[Lead Scoring Banking](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/lead_scoring_bank_marketing) (Binary Classification
 
 **Integrations**
 
