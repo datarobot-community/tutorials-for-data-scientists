@@ -1,6 +1,6 @@
 # Performing Far Forecast when time-series are short With R DataRobot Library
 
-In Early march, the number of days since the first US case was extremely short to perform any reliable long-term forecasting.  The most I could forecast was 2 days ahead.  While this may appear an issue.  It can be solved by combining the new forecast with the historical time-series to predict another new forecast.  The code here shows you how to do so using Time-Series R DataRobot lobrary.
+In Early march, the number of days since the first US case was extremely short to perform any reliable long-term forecasting.  The most I could forecast was 2 days ahead.  While this may appear an issue.  It can be solved by combining the new forecast with the historical time-series to predict another new forecast.  The code here shows you how to do so using Time-Series R DataRobot library.
 
 ### Getting Started
 
