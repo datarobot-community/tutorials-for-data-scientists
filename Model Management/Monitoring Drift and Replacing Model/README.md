@@ -4,4 +4,12 @@ Monitoring Drift and Replacing Model - An example for how you can start to setup
 
 Background: The model performance depends on the data used for predictions. Data drift can lead to unreliable predictions which is why it should be monitored to the model replacement.
 
+### Getting Started
+
+Follow the instrutions in the accompanying notebook.
+
+### Requirements
 Requirements: Python 3.7; DataRobot API version 2.20
+
+### Problem Type
+Model Management

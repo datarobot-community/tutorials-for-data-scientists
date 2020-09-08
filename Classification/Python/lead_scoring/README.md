@@ -1,10 +1,10 @@
-# Tutorial - Lead scoring with Python and DataRobot
+# Lead scoring on Ecommerce Data
 
-This repository contains sample scripts accompanying a [tutorial on the DataRobot Community](https://community.datarobot.com/t5/resources/lead-scoring/ta-p/2422).
+This repository contains scripts accompanying a [tutorial on the DataRobot community](https://community.datarobot.com/t5/resources/lead-scoring/ta-p/2422).
 
-## Usage
+### Getting Started
 
-Review, and follow the steps in  `Lead Scoring Tutorial.ipynb`
-There is also a training dataset you can review: `Leads.csv`
+Follow the steps as outlined within the notebook file. There is also a training dataset you can review: `Leads.csv`
 
-
+### Problem Type
+Binary Classification
