@@ -1,0 +1,188 @@
+---
+title: "4. R API Training - Beyond AutoPilot [Solution]"
+author: "Thodoris Petropoulos and Chester Ismay<br>Contributors: Rajiv Shah"
+output: github_document
+---
+
+This is the 4th exercise to complete in order to finish your `R API Training for DataRobot` course! This exercise will help you learn how to use the repository and advanced tuning to create models that are better than the autopilot.
+
+Here are the actual sections of the notebook alongside time to complete: 
+
+1. Connect to DataRobot. [3min]<br>
+2. Retrieve the Project created during the `Feature Selection Curves` exercise. [5min]<br>
+3. Retrieve validation and cross-validation AUC score for best current model. [7min]
+4. Run models with `Keras` within their `model_type` (64 `sample_pct`). [15min]
+5. Check whether you created a model with a better validation score. [10min]
+6. Sort all models by cross validation score. [15min]
+7. Retrieve a specific model and change a specific hyperparameter.
+
+Each section will have specific instructions so do not worry if things are still blurry!
+
+As always, consult:
+
+- [API Documentation via CRAN Vignettes](https://CRAN.R-project.org/package=datarobot)
+- [Samples](https://github.com/datarobot-community/examples-for-data-scientists)
+- [Tutorials](https://github.com/datarobot-community/tutorials-for-data-scientists)
+
+The last two links should provide you with the snippets you need to complete most of these exercises.
+
+<b>Data</b>
+
+The dataset we will be using throughout these exercises is the well-known `readmissions dataset`. You can access it or directly download it through DataRobot's public S3 bucket [here](https://s3.amazonaws.com/datarobot_public_datasets/10k_diabetes.csv).
+
+### Import Packages
+Import packages here as you start finding out what packages are needed. The DataRobot package is already included for your convenience.
+
+```{r}
+#Proposed packages needed
+library(dplyr)
+library(purrr)
+```
+
+### 1. Connect to DataRobot [3min]
+
+```{r eval=FALSE}
+# Possible solution
+datarobot::ConnectToDataRobot(configPath = "../config.yaml")
+```
+
+```{r message=FALSE}
+# After connecting, load the datarobot package
+library(datarobot)
+```
+
+### 2. Retrieve the Project created during the `Feature Selection Curves` exercise. [5min]<br>
+
+Retrieve the project you created using the readmissions dataset and save it into a variable called `project`.
+
+**Hint**: To use a project created in DataRobot you can either list all of the available projects using the R api or find the ID from the web interface. For example, if you are logged into DataRobot, your browser will be pointing to a link such as this: `https//:YOUR_HOSTNAME/projects/PROJECT_ID/models/MODEL_ID`. Just copy and paste the `PROJECT_ID`.
+
+```{r eval=FALSE}
+#Proposed Solution
+project <- GetProject('YOUR_PROJECT_ID')
+```
+
+```{r echo=FALSE}
+#Proposed Solution
+project <- GetProject('5f355e8fc541da0ff3236dc8')
+```
+
+
+### 3. Retrieve validation and cross-validation AUC score for best current model. [7min]
+
+```{r}
+# Proposed Solution
+best_model <- ListModels(project)[[1]]
+
+best_model
+best_model$metrics$AUC$validation
+best_model$metrics$AUC$crossValidation
+```
+
+### 4. Run models with `Keras` within their `modelType` (64 `samplePct`). [15min]
+Run the first 3 available Keras blueprints with the default Informative Features featurelist.
+
+**Hint** To see models that are in the repository, call the `ListBlueprints()` function on the DataRobot Project object.
+
+```{r}
+# Proposed Solution
+blueprints <- ListBlueprints(project)
+
+keras_bps <- Filter(function(bp) grepl("Keras", bp$modelType),
+                    blueprints)
+
+keras_to_train <- keras_bps[1:3]
+
+job_ids <- vector(mode = "character", length = 3)
+for (i in seq_along(keras_to_train)) 
+    job_ids[i] <- RequestNewModel(
+        project,
+        blueprint = keras_to_train[[i]],
+        samplePct = 64,
+    )
+
+for (j in seq_along(job_ids))
+    WaitForJobToComplete(project, jobId = job_ids[j])
+```
+
+### 5. Check whether you created a model with a better validation score. [10min]
+
+**Hint**": You will have to ask DataRobot to send you the latest models again to see which is the current best model.
+
+```{r}
+# Proposed Solution
+best_model <- ListModels(project)[[1]]
+
+best_model$metrics$AUC$validation
+best_model$metrics$AUC$crossValidation
+```
+
+
+### 6. Sort models by cross validation score. [15min]
+
+**Hint**: Cross validation will not be calculated for all of the models. You can choose to calculate cross validation first for all models or just sort by crossValidation for the ones that have cross validation available (to save time).
+
+**Hint2**: One way to accomplish this is to create a function that extracts different entries from the leaderboard for each model. Then iterate over this function using `map_dfr()` from the {purrr} package and sort based on cross validation values in the resulting data frame.
+
+```{r}
+# Proposed Solution
+
+models <- ListModels(project)
+
+extract_components <- function (model) {
+    model_type <- model$modelType
+    featurelist <- if_else(is.null(model$featurelistName),
+                           "Multiple Feature Lists",
+                           model$featurelistName)
+    sample_pct <- model$samplePct
+    cv <- model$metrics$AUC$crossValidation
+    data.frame(model_type, featurelist, sample_pct, cv)
+}
+
+names_and_cv <- map_dfr(models, extract_components) %>% 
+    arrange(desc(cv))
+```
+
+
+### 7. Retrieve a specific model and change a specific hyperparameter.
+
+**Instructions**:
+
+Find the model with the below characteristics:
+
+- Model Type = `eXtreme Gradient Boosted Trees Classifier with Early Stopping`
+- Featurelist = `Informative Features`
+- Sample Percentage = 64
+
+Tune:
+
+- Change `learning_rate` to 0.2
+
+**Hint**: There is a script in [Samples](https://github.com/datarobot-community/examples-for-data-scientists) that can help you with hyperparameter tuning.
+
+```{r}
+# Proposed Solution
+isolate_on_criteria <- function (model) {
+    model_match <- model$modelType == "eXtreme Gradient Boosted Trees Classifier with Early Stopping"
+    fl_match <- model$featurelistName == "Informative Features"
+    model_match & !is.null(fl_match)
+}
+model_to_tune <- Filter(isolate_on_criteria, models)[[1]]
+
+#Start tuning procedure by creating a function we'll call `tune` here
+tune <- StartTuningSession(model_to_tune)
+
+# List of parameters available for tuning
+parameters <- GetTuningParameters(model_to_tune)
+summary(parameters)
+
+#Now that we know the name of the variable we want to change is `learning_rate`, 
+#we can use the tune() function that was created above from 
+#`StartTuningSession()` to start training this tuned model.
+tuning_job <- tune(model_to_tune, learning_rate = 0.2)
+
+#Get model
+tuned_model <- GetModelFromJobId(project, modelJobId = tuning_job)
+
+tuned_model$metrics$AUC$validation
+```
