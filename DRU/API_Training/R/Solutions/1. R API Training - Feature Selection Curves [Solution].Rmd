@@ -1,0 +1,301 @@
+---
+title: "1. R API Training - Feature Selection Curves [Solution]"
+author: "Thodoris Petropoulos and Chester Ismay<br>Contributors: Rajiv Shah"
+output: github_document
+---
+
+Hey again! This is the first in a series of exercises to complete in order to finish your `R API Training for DataRobot` course! This exercise will help you learn how to manipulate `DataRobot Models` and `Feature Lists`.
+
+Here are the actual sections of the notebook alongside time to complete: 
+
+1. Connect to DataRobot. [3min]<br>
+2. Create a Project. [15min]<br>
+3. Create Custom Feature Lists. [15min]<br>
+4. Identify Specific Models. [20min]<br>
+5. Retrain Models on the custom feature lists. [10min] <br>
+6. Plot performance based on the different feature lists. [30min]
+7. Bonus Question
+
+Each section will have specific instructions so do not worry if things are still blurry!
+
+As always, consult:
+
+- [API Documentation via CRAN Vignettes](https://CRAN.R-project.org/package=datarobot)
+- [Samples](https://github.com/datarobot-community/examples-for-data-scientists)
+- [Tutorials](https://github.com/datarobot-community/tutorials-for-data-scientists)
+
+The last two links should provide you with the snippets you need to complete most of these exercises.
+
+<b>Data</b>
+
+The dataset we will be using throughout these exercises is the well-known `readmissions` dataset. You can access it or directly download it through DataRobot's public S3 bucket [here](https://s3.amazonaws.com/datarobot_public_datasets/10k_diabetes.csv). We have defined the variable `data` which can be used directly in project creation and links to our training dataset.
+
+```{r}
+data <- "https://s3.amazonaws.com/datarobot_public_datasets/10k_diabetes.csv"
+```
+
+
+### 1. Connect to DataRobot [3min]
+
+You should already know how to do that from the introductory script. If you have a Yaml file it should be very straightforward! Else, use the `endpoint` and `token` variables to define your credentials.
+
+```{r}
+# Possible solution
+datarobot::ConnectToDataRobot(configPath = "../config.yaml")
+```
+
+```{r}
+# After connecting, load the datarobot package
+library(datarobot)
+```
+
+### 2. Create a Project [10min]
+Create a DataRobot Project:
+
+1. Use the `data` variable as input.
+2. Set `readmitted` as the target.
+3. Start the project using explicitly the `quick` autopilot in the `mode` variable.
+4. Use `AUC` as the optimization metric.
+5. Set `worker_count` variable to -1 using the `UpdateProject()` function.
+6. Wait for Autopilot to complete. 
+
+While waiting, go through the documentation and the different settings that exist.
+
+**HINT**: To initiate the project with `quick` autopilot, you will have to use two different functions: the `SetupProject()` function and the `SetTarget()` function. 
+
+```{r}
+# Possible solution
+project <- SetupProject(
+  dataSource = data,
+  projectName = "01-04_Feature_Selection_Curves"
+)
+
+SetTarget(
+  project = project,
+  target = "readmitted",
+  mode = "quick",
+  metric = "AUC"
+)
+UpdateProject(project = project, workerCount = -1)
+WaitForAutopilot(project)
+```
+
+### 3. Create Custom Feature Lists [15min]
+
+Instructions:
+
+1. Retrieve Feature Impact for the most accurate model by the validation score.
+2. Create 3 different Feature Lists named `top_5`, `top_10` and `top_15`. Each featurelist will have the respective top $n$ features based on Feature Impact score.
+
+**HINT**: Search for the `CreateFeaturelist()` function. This will help you create a new featurelist.
+
+```{r}
+# Possible solution
+best_model <- ListModels(project)[[1]]
+
+fi_df <- GetFeatureImpact(best_model)
+
+# Create vectors with correct features
+top_5 <- head(fi_df, 5)$featureName
+top_10 <- head(fi_df, 10)$featureName
+top_15 <- head(fi_df, 15)$featureName
+```
+
+```{r}
+# Create Feature Lists
+top_5_fl <- CreateFeaturelist(project, "top_5", featureNames = top_5)
+top_10_fl <- CreateFeaturelist(project, "top_10", featureNames = top_10)
+top_15_fl <- CreateFeaturelist(project, "top_15", featureNames = top_15)
+```
+
+### 4. Identify Specific Models [20min]
+
+Create a list with the models that fulfill the below requirements:
+
+1. Model's `modelType` is 'Light Gradient', 'eXtreme Gradient', or 'Elastic-Net'.
+2. Model's `samplePct` equals 64% (The amount of data the model has been trained on).
+
+**Hint**: Look into the `filter` variable of the `ListModels()` function. That should help you find the models that have been trained on 64% of the data fast.
+
+```{r}
+# Possible solution
+
+# Define vector of model types we want
+model_types <- c("eXtreme Gradient", "Elastic-Net", "Light Gradient")
+
+# Get all models with 64% training sample.
+models_64 <- ListModels(project, filter = list("samplePct" = 64))
+
+# Filter models that belong to the specific model types.
+final_models <- list()
+i <- 1
+for (model in models_64) {
+  for (type in model_types) {
+    if (grepl(type, model$modelType)) {
+      final_models[[i]] <- model
+      i <- i + 1
+    }
+  }
+}
+```
+
+### 5. Retrain models on the custom featurelists [10 min] 
+
+Use the list created in `step 4` to: 
+
+1. Retrain the models with the top_5, top_10, top_15 featurelists and 64% of the data.
+
+```{r}
+fl_list <- list(top_5_fl, top_10_fl, top_15_fl)
+job_ids <- vector(mode = "character")
+i <- 1
+for (l in fl_list) {
+  for (model in final_models) {
+    job_ids[i] <- RequestNewModel(project,
+      blueprint = list(
+        blueprintId = model$blueprintId,
+        project = project$projectId
+      ),
+      samplePct = 64,
+      featurelist = list(featurelistId = l$featurelistId)
+    )
+    i <- i + 1
+  }
+}
+# Wait for all jobs to complete
+for (id in job_ids) {
+  WaitForJobToComplete(project, id)
+}
+```
+
+### 6. Plot performance based on the different featurelists [15min]
+
+Using the knowledge that you acquired from the previous questions:
+
+1. Create a list with all of the models retrained on `top_5`, `top_10`, and `top_15` feature lists.
+2. Find the average value of the cross-validation score based on AUC for the retrained models and plot that.
+
+**Hint**: DataRobot Model objects have an element called `featurelistName` which returns the name of the featurelist used to train that model. That should help you find the models you are looking for. Note that Blender models will often return `NA` as featurelist so they are removed from the search below.
+
+**Hint 2**: DataRobot will not calculate cross-validation scores automatically for the retrained models. What you can do is call the `CrossValidateModel()` function in order to calculate cross validation.
+
+**Warning**: Do not forget to wait after you ask DataRobot to calculate cross validation scores!
+
+```{r}
+# Proposed Solution
+
+fl_names <- c("top_5", "top_10", "top_15")
+
+# Get all models with 64% training sample.
+models_64 <- ListModels(project, filter = list("samplePct" = 64))
+
+nonblenders <- Filter(
+  function(m) !grepl(pattern = "Blender", x = m$modelType),
+  models_64
+)
+```
+
+```{r}
+# Get all models that have been retrained
+retrained_models <- list()
+i <- 1
+for (model in nonblenders) {
+  for (fl in fl_names) {
+    if (fl == model$featurelistName) {
+      retrained_models[[i]] <- model
+      i <- i + 1
+    }
+  }
+}
+```
+
+```{r}
+# Calculate crossValidation scores for all of the retrained models
+# if possible
+job_ids <- vector(mode = "character")
+i <- 1
+for (model in ListModels(project)) {
+  try(
+    expr = {
+      job_ids[i] <- CrossValidateModel(model = model)
+      i <- i + 1
+    },
+    silent = TRUE
+  )
+}
+# Wait for all the cross validation jobs to complete
+for (id in job_ids) {
+  WaitForJobToComplete(project, id)
+}
+```
+
+```{r}
+# Query the retrained models again else they will not have their crossValidation score
+# since they are based on the previous version of the project when `models_64` was created
+
+# Get all non-blender models with 64% training sample.
+models_64 <- ListModels(project, filter = list("samplePct" = 64))
+nonblenders <- Filter(
+  function(m) !grepl(pattern = "Blender", x = m$modelType),
+  models_64
+)
+
+# Update retrained_models with new CV results
+retrained_models <- list()
+i <- 1
+for (model in nonblenders) {
+  for (fl in fl_names) {
+    if (fl == model$featurelistName) {
+      retrained_models[[i]] <- model
+      i <- i + 1
+    }
+  }
+}
+
+# Empty vectors to hold results
+top_5_cv_scores <- vector(mode = "numeric")
+top_10_cv_scores <- vector(mode = "numeric")
+top_15_cv_scores <- vector(mode = "numeric")
+
+for (model in retrained_models) {
+  if (model$featurelistName == "top_5") {
+    top_5_cv_scores <- append(
+      x = top_5_cv_scores,
+      values = model$metrics$AUC$crossValidation
+    )
+  } else if (model$featurelistName == "top_10") {
+    top_10_cv_scores <- append(
+      x = top_10_cv_scores,
+      values = model$metrics$AUC$crossValidation
+    )
+  } else {
+    top_15_cv_scores <- append(
+      x = top_15_cv_scores,
+      values = model$metrics$AUC$crossValidation
+    )
+  }
+}
+
+values <- sapply(
+  list(top_5_cv_scores, top_10_cv_scores, top_15_cv_scores),
+  mean
+)
+names <- factor(c("top_5", "top_10", "top_15"),
+  levels = c("top_5", "top_10", "top_15")
+)
+plot(names, values)
+```
+
+What do you see?
+
+### Verification
+
+To verify that you have completed everything correctly, look at the `Light Gradient Boosting on ElasticNet Predictions` model that was trained on 64% of the data with the Informative Features featurelist. The cross-validation score for AUC should be 0.6991.
+
+### Bonus Question
+
+You might have noticed that the first list of models we created had 5 (might change with DR releases) models. It makes sense that since we want to run each one of these models using 3 different feature lists, we should have ended with 15 models. That is not the case as we had 12 models in the end. Can you think why that is the case?
+
+#### Bonus Question Answer:
+
+The 5 models we retrieved are not unique. Some of them are the same just trained on different featurelists. DataRobot identifies that we have already initiated model building with a featurelist and it will not create a duplicate model.

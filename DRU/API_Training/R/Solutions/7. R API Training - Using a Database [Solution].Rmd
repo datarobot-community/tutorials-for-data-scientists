@@ -1,0 +1,203 @@
+---
+title: "7. R API Training - Using a Database [Solution]"
+author: "Thodoris Petropoulos and Chester Ismay<br>Contributors: Rajiv Shah"
+output: github_document
+---
+
+This is the 7th exercise to complete in order to finish your R API Training for DataRobot course! This exercise teaches you how to use a database in order to read datasets to train models or dump your predictions in a table.
+
+Here are the actual sections of the notebook alongside time to complete:
+
+1. Connect to DataRobot. [3min]
+2. Connect to the SQLite database provided. [5min]
+3. Load the `readmissions` dataset that needs scoring. [10min]
+4. Use one of the deployments generated earlier to score the dataset. [15min]
+5. Writeback predictions in the database
+
+As always, consult:
+
+- [API Documentation via CRAN Vignettes](https://CRAN.R-project.org/package=datarobot)
+[Samples](https://github.com/datarobot-community/examples-for-data-scientists) <br>
+[Tutorials](https://github.com/datarobot-community/tutorials-for-data-scientists)
+
+The last two links should provide you with the snippets you need to complete most of these exercises.
+
+**Data**
+
+The dataset used in the current exercise can be reached via `databases/test_database.db`
+
+### Import Packages
+Import packages here as you start finding out what packages are needed. The DataRobot package is already included for your convenience.
+
+```{r}
+# Proposed packages needed
+library(dplyr)
+library(tibble)
+#library(dbplyr)
+library(readr)
+library(DBI)
+library(RSQLite)
+```
+
+
+### 1. Connect to DataRobot. [3min]<br>
+
+```{r eval=FALSE}
+# Possible solution
+datarobot::ConnectToDataRobot(configPath = "../config.yaml")
+
+# After connecting, load the datarobot package
+library(datarobot)
+```
+
+```{r echo=FALSE}
+library(datarobot)
+```
+
+
+#### 2. Connect to the SQLite database provided. [5min]
+
+The SQLite database is under the folder `databases` with filename `test_database.db`. To create a connection, use the `sqlite3` package. It becomes apparent that while using R, it really does not matter where your data is, you could just invoke the appropriate packages and load your data.
+
+```{r}
+conn <- DBI::dbConnect(
+    RSQLite::SQLite(), 
+    dbname = here::here("databases", "test_database.db"),
+    path = ":dbname:"
+)
+```
+
+### 3. Load the readmissions dataset that needs scoring. [10min]
+The readmissions dataset is saved within the `test_database`.
+
+**Instructions** 
+1. Query the first 100 observations.
+2. Save them into a data frame that is outputted as a CSV.
+
+```{r}
+# Possible Solution
+df <- dbGetQuery(conn, statement = "SELECT * FROM readmissions LIMIT 100")
+
+# Could also do directly with {dplyr} syntax
+# df <- tbl(conn, "readmissions") %>% collect() %>% slice(1:100)
+
+write_csv(df, "dataset_to_be_scored.csv")
+```
+
+
+#### 4. Use one of the deployments generated earlier to score the dataset. [15min]
+**Instructions**
+1. Navigate to `Deployments` page within DataRobot.
+2. Use the R code from the previous exercise to make a prediction with this deployment         
+    - specifying `filename` in the call to the `main()` function as this CSV file we just created from the first 100 rows of the readmissions table and
+    - updating the deployment ID with your value.
+3. Score the dataset and save the results in a new data frame.
+
+```{r}
+# This code is a modified R version of the Python code available
+# under the Deployments > Deployments > Readmissions Deployment >
+# Prediction API > Single tab
+# with Input Format chosen as CSV. Go there to get your 
+# `DEPLOYMENT_ID`, `API_URL`, `API_KEY`, and 
+# `DATAROBOT_KEY` to fill in below.
+
+API_URL <- glue::glue("https://datarobot-predictions.orm.datarobot.com/predApi/v1.0/deployments/{DEPLOYMENT_ID}/predictions")
+API_KEY <- " "
+DATAROBOT_KEY <- " "
+
+# Code to produce prediction
+MAX_PREDICTION_FILE_SIZE_BYTES <- 52428800  # 50 MB
+
+make_datarobot_deployment_predictions <- function(data, deployment_id) {
+    # Set HTTP headers. The charset should match the contents of the file.
+    headers_list <- list(
+        'Content-Type' = 'text/plain; charset=UTF-8',
+        'Authorization' = paste('Bearer', API_KEY),
+        'DataRobot-Key' = DATAROBOT_KEY
+    )
+    headers <- purrr::as_vector(headers_list)
+    # Make API request for predictions
+    predictions_response <- httr::POST(
+        url = API_URL,
+        httr::add_headers(.headers = headers),
+        body = httr::upload_file(filename)
+    )
+    
+    raise_dataroboterror_for_status(predictions_response)
+}
+
+# Raise error if the request fails along with the 
+# response returned
+raise_dataroboterror_for_status <- function(response) {
+    if (httr::http_error(response))
+        stop(paste("Error:", httr::http_status(response)))
+    else {
+        message("Predictions with deployment completed.")
+        # Return a JSON object in the format similar to
+        # https://app.datarobot.com/docs/predictions/api/new-prediction-api.html#response-schema
+        httr::content(response)
+    }
+}
+
+# A usage demonstration of 
+# `make_datarobot_deployment_predictions(data, deployment_id)`
+main <- function(filename, deployment_id) {
+    
+    if (missing(filename))
+        stop("Input file as `filename` is a required argument.")
+    
+    data <- readr::read_csv(filename, col_types = cols())
+    data_size <- lobstr::obj_size(data)
+    if (data_size >= MAX_PREDICTION_FILE_SIZE_BYTES) {
+        stop(
+            glue(
+                "Input file is too large: {data_size} bytes. \\
+        Max allowed size is: {MAX_PREDICTION_FILE_SIZE_BYTES} bytes."
+            )
+        )
+    }
+    return(make_datarobot_deployment_predictions(filename, deployment_id))
+}
+```
+
+```{r}
+#Proposed Solution
+filename <- "dataset_to_be_scored.csv"
+result <- main(filename, DEPLOYMENT_ID)
+
+#Drop column with probabilities and store as data frame
+result_df <- purrr::map_dfr(result$data, function(row) row[-1]) %>% 
+    # Shift `rowId` to be 1-indexed instead of 0-indexed
+    # to prepare for upcoming join
+    mutate(rowId = as.character(rowId + 1))
+```
+
+#### 5. Writeback predictions in the database
+
+**Instructions**
+1. Join the results table with the original data used to score
+2. Save the results in a table called `prediction_results` within the `test_database_db`
+
+**Hint**: Check out the {DBI} R package for ways to write tables to a database.
+
+```{r}
+# Possible Solution
+
+# Merge tables by `rowId` key
+final_scored_data <- df %>% 
+    rownames_to_column(var = "rowId") %>% 
+    inner_join(result_df, by = "rowId")
+
+# Save results to the database
+DBI::dbWriteTable(
+    conn, 
+    name = "prediction_results", 
+    value = final_scored_data,
+    append = TRUE
+)
+
+# Check that table created
+tbl(conn, "prediction_results") %>% 
+    collect() %>% 
+    glimpse()
+```

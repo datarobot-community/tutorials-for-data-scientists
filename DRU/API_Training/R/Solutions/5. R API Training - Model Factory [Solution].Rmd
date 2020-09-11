@@ -1,0 +1,139 @@
+---
+title: "5. R API Training - Model Factory [Solution]"
+author: "Thodoris Petropoulos and Chester Ismay<br>Contributors: Rajiv Shah"
+output: github_document
+---
+
+This is the 5th exercise to complete in order to finish your `R API Training for DataRobot` course! This exercise teaches you how to leverage DataRobot in order to create a model factory. That could help you increase model accuracy and shows you the true capabilities of an AutoML platform.
+
+Here are the actual sections of the notebook alongside time to complete: 
+
+1. Connect to DataRobot. [3min]<br>
+2. Create a data frame/tibble with the `readmissions` dataset. [3min]
+3. Create a DataRobot Project with the `readmissions` dataset explicitly using `quick` autopilot. [5min]
+4. Split the dataset and run multiple DataRobot Projects based on the `admission_type_id` column explicitly using `quick` autopilot. [25min]
+5. Check the validation scores of the best models for each one of the projects. What do you see? [15min]
+
+Each section will have specific instructions so do not worry if things are still blurry!
+
+As always, consult:
+
+- [API Documentation via CRAN Vignettes](https://CRAN.R-project.org/package=datarobot)
+- [Samples](https://github.com/datarobot-community/examples-for-data-scientists)
+- [Tutorials](https://github.com/datarobot-community/tutorials-for-data-scientists)
+
+The last two links should provide you with the snippets you need to complete most of these exercises.
+
+<b>Data</b>
+
+The dataset we will be using throughout these exercises is the well-known `readmissions dataset`. You can access it or directly download it through DataRobot's public S3 bucket [here](https://s3.amazonaws.com/datarobot_public_datasets/10k_diabetes.csv).
+
+### Import Packages
+Import packages here as you start finding out what packages are needed. The DataRobot package is already included for your convenience.
+
+```{r}
+# Proposed packages needed
+library(dplyr)
+library(purrr)
+library(readr)
+```
+
+
+### 1. Connect to DataRobot. [3min]<br>
+
+```{r}
+# Possible solution
+datarobot::ConnectToDataRobot(configPath = "../config.yaml")
+
+# After connecting, load the datarobot package
+library(datarobot)
+```
+
+### 2. Create a data frame/tibble with the `readmissions` dataset. [3min]
+
+```{r}
+# Proposed Solution
+
+df <- read_csv("https://s3.amazonaws.com/datarobot_public_datasets/10k_diabetes.csv")
+head(df)
+```
+
+### 3. Create a DataRobot Project with the `readmissions` dataset explicitly using `quick` autopilot. [5min]
+
+
+**Instructions**:
+1. Use the `StartProject()` function.
+2. Set `readmitted` as the target.
+3. Start the project using explicitly the `quick` autopilot in the `mode` variable.
+4. Update the project to have a `worker_count` variable of -1.
+5. Wait for (Quick) Autopilot to complete.
+
+**HINT**: You should have already done something similar during the 1st exercise of this course.
+
+```{r}
+#Possible solution
+project <- StartProject(
+  dataSource = df, 
+  projectName = "05_Model_Factory_01",
+  target = "readmitted",
+  mode = "quick"
+)
+UpdateProject(project, workerCount = -1)
+```
+
+### 4. Split the dataset and run multiple DataRobot Projects based on the `admission_type_id` column explicitly using `quick` autopilot. [25min]
+
+**Hint**: Some `admission_type_id` values have less than 100 rows. That is the minimum requirement to start a DataRobot project. You should create an exception and just skip those admission types.
+
+**Hint 2**: This will take a long time to execute. You can either execute for only a small part of the different `admission_type_id` values or just move on to the next exercise while this is executing.
+
+
+```{r}
+#Proposed Solution
+
+less_than_100 <- df %>% 
+  count(admission_type_id) %>% 
+  filter(n <= 100) %>% 
+  pull(admission_type_id)
+
+modified_df <- df %>% 
+  filter(!admission_type_id %in% less_than_100)
+
+project_list <- modified_df %>%
+  group_by(admission_type_id) %>%
+  group_map(~ StartProject(
+    dataSource = .x,
+    projectName = paste0("Readmission_", .y$admission_type_id),
+    target = "readmitted",
+    mode = "quick"
+  ))
+
+walk(project_list, UpdateProject, workerCount = -1)
+walk(project_list, WaitForAutopilot, verbosity = 0)
+```
+
+
+
+### 5. Check the validation scores of the best models for each one of the projects. What do you see? [15min]
+
+- Based on `AUC` score
+
+**Hint**: The `ListProjects()` function takes a `filter` parameter that you can
+use to search for different phrases in the names of your projects. It returns
+a `projectSummaryList` that can be further examined.
+
+```{r}
+#Proposed Solution
+
+these_projects <- ListProjects(filter = list("projectName" = "Readmission_"))
+
+#Get best model from original project which has been trained on all of the data.
+ListModels(project)[[1]]$metrics$AUC$validation
+
+#Get best model from each one of the projects trained on a subset of data based 
+#on `admission_type_id`.
+for (proj_id in these_projects$projectId) {
+  top_model <- ListModels(project = proj_id)[[1]]
+  print(paste0(top_model$projectName, ": ", top_model$metrics$AUC$validation))
+}
+```
