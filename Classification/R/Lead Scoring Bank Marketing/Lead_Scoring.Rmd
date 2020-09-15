@@ -11,26 +11,26 @@ knitr::opts_chunk$set(echo = TRUE)
 
 In this exercise we are going to use a strategy called “lead scoring” to predict the probability that a prospect will become a customer. To achieve this, we are going to use binary classification.
 
-**There are a few things that you need for this exercise:** 
+**There are a few things that you need for this exercise:**
 
-1. Your DataRobot login 
+1. Your DataRobot login
 2. Your DataRobot API key
-3. The exercise dataset:  bank-full.csv
+3. The exercise dataset: bank-full.csv
 
 ## Credentials
-To access the DataRobot API user need to connect to it. To make sure authorize users are accessing the DataRobot API user need to use their username, password or API token. You also need to ensure your "API Access" configuration is ON (please ask your administrator if not).
+To access the DataRobot API, you need to connect to it. To make sure authorize only users are accessing the DataRobot API, you need to provide your username, password or API token. You also need to ensure your "API Access" configuration is ON (please ask your administrator if not).
 
-To find your API Token, visit YOUR_API_HOST, log in and look under **Developer Tools** (under the person icon).
+To find your API Token, visit YOUR_API_HOST, log in, and look under **Developer Tools** (under the person icon).
 
 &nbsp;
 
 ## Dataset
 
-The dataset was taken from the UCI Machine Learning Repository.  It was published in a paper by Sérgio Moro and colleagues in 2014. 
+The dataset was taken from the UCI Machine Learning Repository.  It was published in a paper by Sérgio Moro and colleagues in 2014.
 
 *[Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014*
 
-This dataset includes information from a direct telemarketing campaign of a Portuguese bank.  The target is indicated by the feature **“y”** and a “yes” means that the prospect purchased the product being offered and “no” means that they did not. 
+This dataset includes information from a direct telemarketing campaign of a Portuguese bank.  The target is indicated by the feature **“y”** and a “yes” means that the prospect purchased the product being offered and “no” means that they did not.
 
 
 ```{r message=FALSE}
@@ -43,7 +43,7 @@ library(ggplot2)
 
 # Connect to DataRobot*****
 
-ConnectToDataRobot(endpoint = "YOUR_DATAROBOT_HOST", 
+ConnectToDataRobot(endpoint = "YOUR_DATAROBOT_HOST",
                    token = "YOUR_API_KEY")
 
 # Load Dataset*****
@@ -55,7 +55,7 @@ df <- read.csv("bank-full.csv", sep = ";")
 
 ## Start Project
 
-For the setup, start the project with the dataset (**bank-full.csv**) and indicate the target as “**y**”.  Set the mode to "**quick**".   
+For the setup, start the project with the dataset (**bank-full.csv**) and indicate the target as “**y**”.  Set the mode to "**Quick**".
 
 
 ```{r eval=TRUE}
@@ -68,7 +68,7 @@ project <- StartProject(df,
 
 &nbsp;
 
-It can be onerous to re-run autopilot every time you want to run the script.  If your project is already  created, then you can set the previous chunk of code to "eval= False".  This will make sure you do not rerun autopilot.  You can then simply refer to the project using the GetProject function (see below).  The project id refers to the first number in the URL for the project. 
+It can be onerous to rerun Autopilot every time you want to run the script.  If your project is already created, then you can set the previous chunk of code to "eval= False".  This will make sure you do not rerun Autopilot.  You can then simply refer to the project using the GetProject function (see below).  The project id refers to the first number in the URL for the project.
 
 ```{r }
 #project <- GetProject('YOUR_PROJECT_ID')
@@ -78,7 +78,7 @@ It can be onerous to re-run autopilot every time you want to run the script.  If
 
 ### Select Model to Evaluate
 
-You want to select the 80% version of the top model to evaluate.  You can use the code below to select this model. 
+You want to select the 80% version of the top model to evaluate.  You can use the code below to select this model.
 
 ```{r }
 
@@ -93,7 +93,7 @@ model <- GetModel(project, model[[1]]$modelId)
 
 ## Get Validation Scores
 
-You can get the validation and cross validation score of the model using the code below.  This can be pulled for multiple models if you want to compare them programmatically.
+You can get the validation and cross-validation score of the model using the code below.  This can be pulled for multiple models if you want to compare them programmatically.
 
 
 ```{r }
@@ -103,7 +103,7 @@ val <- select(val, validation, crossValidation)
 
 &nbsp;
 
-Below we have the validation scores for the model. We can see that the model does a pretty good job. 
+Below we have the validation scores for the model. We can see that the model does a pretty good job.
 
 `r kable(val)`
 
@@ -111,7 +111,7 @@ Below we have the validation scores for the model. We can see that the model doe
 
 ## Get ROC Curve
 
-Now that we know the overall performance of the model, let's take a deeper look at the ROC curve.  You can use the code below to pull the ROC chart from DataRobot and plot it with ggplot2. 
+Now that we know the overall performance of the model, let's take a deeper look at the ROC Curve.  You can use the code below to pull the ROC chart from DataRobot and plot it with ggplot2.
 
 &nbsp;
 
@@ -130,7 +130,7 @@ ROC <- as.data.frame(ROC$rocPoints)
 ggplot(ROC, aes(x=falsePositiveRate, y=truePositiveRate)) +
   geom_line(color = "#2D8FE2")+
   theme_classic() +
-  labs(title= "ROC Curve") + 
+  labs(title= "ROC Curve") +
   geom_text(x=0.75, y=0.35, label=paste0("AUC: ", val$crossValidation))
 ```
 
@@ -138,39 +138,37 @@ ggplot(ROC, aes(x=falsePositiveRate, y=truePositiveRate)) +
 
 ### Get the Feature Impact
 
-Now that we have evaluated our model, let's take a look at which features are having the highest impact. 
+Now that we have evaluated our model, let's take a look at which features are having the highest impact.
 
 ```{r }
 feature_impact <- GetFeatureImpact(model)
-ggplot(feature_impact, aes(x=reorder(featureName, impactNormalized), y=impactNormalized)) + 
+ggplot(feature_impact, aes(x=reorder(featureName, impactNormalized), y=impactNormalized)) +
   geom_bar(stat = "identity", fill = "#2D8FE2")+
-  coord_flip() 
+  coord_flip()
 ```
 
 &nbsp;
 
-Feature impact is calculated using Permutation Importance.  We can see that the most impactful feature is **duration**, followed by **month** and **day**. 
+Feature impact is calculated using Permutation Importance.  We can see that the most impactful feature is **duration**, followed by **month** and **day**.
 
 
 &nbsp;
 
 ### Get Holdout Predictions
 
-By default DataRobot does a 5 fold cross validation and 20% holdout.  The holdout data was not used during the training and we can pull these scores to see how our model predicted on new data. 
+By default DataRobot does a five-fold cross-validation and 20% holdout. The holdout data was not used during the training and we can pull these scores to see how our model predicted on new data.
 
 ```{r }
 predictions <- GetTrainingPredictionsForModel(model, dataSubset = "holdout")
 head(predictions)
 
-#You cannot request a prediction job more than once.  If you run this file multiple times, then comment out the other code in this chunk and uncomment the following code. 
+#You cannot request a prediction job more than once.  If you run this file multiple times, then comment out the other code in this chunk and uncomment the following code.
 
 #predictions_multiple <- ListTrainingPredictions(project)
-#$head(GetTrainingPredictions(project, predictions_multiple[[1]]$id)) 
+#$head(GetTrainingPredictions(project, predictions_multiple[[1]]$id))
 ```
 
 
 ### Other Analyses to Try
 
-You can do a lot programmatically with the API.  You can get confusion matrices, lift charts, word clouds and even create model factories.  Check out the [tutorials on our GitHub](https://github.com/datarobot-community/tutorials-for-data-scientists) page! 
-
-
+You can do a lot programmatically with the API.  You can get confusion matrices, lift charts, word clouds, and even create model factories.  Check out the [tutorials on our GitHub](https://github.com/datarobot-community/tutorials-for-data-scientists) page!
