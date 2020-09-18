@@ -8,7 +8,7 @@ This repository contains various end to end use-case examples using the DataRobo
 - For General articles on DataRobot and news, visit [DataRobot Community](https://community.datarobot.com/)
 - Simple example scripts [Examples for Data Scientists](https://github.com/datarobot-community/examples-for-data-scientists)
 
-Start learning with the [API Training](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/DRU/API_Training) module.
+Start learning using the [API Training](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/DRU/API_Training) module.
 
 **Python**
 
