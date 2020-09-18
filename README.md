@@ -54,7 +54,6 @@ Start learning with the [API Training](https://github.com/datarobot-community/tu
 
 If you'd like to report an issue or bug, suggest improvements, or contribute code to this project, please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
 
-
 # Code of Conduct
 
 This project has adopted the Contributor Covenant for its Code of Conduct. 
