@@ -34,6 +34,8 @@ Start learning using the [API Training](https://github.com/datarobot-community/t
 
 [Automated Retraining and Replacement of Models](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Model%20Management/Automated%20Retraining%20and%20Replacement) (Model Management)
 
+[Predicting CO2 levels for Mauna Loa](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/OTV/Python/Predicting%20CO2%20levels%20for%20Mauna%20Loa) (OTV, Regression)
+
 **R** 
 
 [Detecting Droids with DataRobot](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Classification/R/Detecting%20Droids) (Image, Binary Classification)
