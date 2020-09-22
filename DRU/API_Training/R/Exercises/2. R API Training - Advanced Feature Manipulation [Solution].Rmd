@@ -1,0 +1,119 @@
+---
+title: "2. R API Training - Advanced Feature Manipulation [Solution]"
+author: "Thodoris Petropoulos and Chester Ismay<br>Contributors: Rajiv Shah"
+output: github_document
+---
+
+This is the 2nd exercise to complete in order to finish your `R API Training for DataRobot` course! This exercise will help you learn how to do advanced feature manipulation to increase model accuracy and make your models more parsimonious by reducing the numbers of features they are using.
+
+Here are the actual sections of the notebook alongside time to complete: 
+
+1. Connect to DataRobot. [3min]<br>
+2. Retrieve the Project created during the `Feature Selection Curves` exercise. [5min]<br>
+3. Retrieve FI for the top 5 models trained on the `Informative Features` Feature list. [30min]<br>
+4. Plot the top 5 features by median FI scores. Then create two lists with top 10 and top 20 features.[15min]
+5. Run the best non-blender model using 100% of the sample data on the newly created feature lists. [7min]
+6. Compare the newly trained models. Which one has the highest AUC validation score?. [7min]
+7. Bonus Question.
+
+Each section will have specific instructions so do not worry if things are still blurry!
+
+As always, consult:
+
+- [API Documentation via CRAN Vignettes](https://CRAN.R-project.org/package=datarobot)
+- [Samples](https://github.com/datarobot-community/examples-for-data-scientists)
+- [Tutorials](https://github.com/datarobot-community/tutorials-for-data-scientists)
+
+The last two links should provide you with the snippets you need to complete most of these exercises.
+
+<b>Data</b>
+
+The dataset we will be using throughout these exercises is the well-known `readmissions` dataset. You can access it or directly download it through DataRobot's public S3 bucket [here](https://s3.amazonaws.com/datarobot_public_datasets/10k_diabetes.csv).
+
+### Import Packages
+Import packages here as you start finding out what packages are needed.
+
+```{r}
+# Proposed packages needed
+library(dplyr)
+library(ggplot2)
+library(tibble)
+```
+
+### 1. Connect to DataRobot [3min]
+
+```{r}
+```
+
+### 2. Retrieve the Project created during the `Feature Selection Curves` exercise. [5min]<br>
+
+Retrieve the project you created using the readmissions dataset in Exercise 1 and save it into a variable called `project`.
+
+**Hint 1**: To use a project created in DataRobot you can either list all of the available projects using the R API or find the ID from the web interface. For example, if you are logged into DataRobot, your browser will be pointing to a link such as this: `https//:YOUR_HOSTNAME/projects/PROJECT_ID/models/MODEL_ID`. Just copy paste the `PROJECT_ID`.
+
+**Hint 2**: Check the `GetProject()` function. That should help you retrieve your DataRobot project.
+
+```{r eval=FALSE}
+```
+
+### 3. Retrieve FI for the top 5 models trained on the `Informative Features` Feature list. [30min]<br>
+
+**Instructions**:
+- Create a list of the top 5 models based on the `Cross Validation` score. (This is the default for this project.)
+- Make sure that these models have been trained using the `Informative Features` list
+- Get Feature Impact for each of these models
+
+```{r}
+```
+
+### 4. Plot the top 5 features by median FI scores. Then create two lists with top 10 and top 20 features.[15min]
+
+**Instructions**
+1. Aggregate the results you retrieved from Feature Impact to calculate the top 10 and top 20 features. 
+2. Create two DataRobot feature lists `top_10_aggregated` and `top_20_aggregated`.
+3. Plot the top 5 features with their FI score.
+
+```{r}
+```
+
+```{r}
+```
+
+```{r}
+```
+
+We basically built a 'wisdom of the crowds' process that provides us with the most impactful features based on multiple models. We could also run the same process between projects with different seeds. This can be especially helpful in wide datasets.
+
+### 5. Run the best non-blender model using 100% of the sample data on the newly created feature lists. [7min]
+
+**Hint**: You will first need to unlock project holdout to be able to train the models on 100% of the data.
+
+**Hint 2**: Do not forget to wait until your model’s training is complete.
+
+```{r}
+```
+
+```{r}
+```
+
+### 6. Compare the newly trained models. Which one has the highest AUC validation score? [7min]
+
+1. Query all of the nonblender models.
+2. Find the models that we need (trained on the specific feature lists).
+3. Print the accuracy metric for each one of them.
+
+```{r}
+```
+
+
+### Verification
+
+To verify that you have completed everything correctly, look at the AUC Validation score for the best model when trained on the new featurelists. Is the highest AUC just a bit higher than `0.70`?
+
+### Bonus Question
+
+Why is the number of models trained more than 2? Can you guess? 
+
+#### Bonus Question Answer
+
+Our best model is an `eXtreme Gradient...` model and it leverages a separate `Auto-tune....` model. The second model also appears in the leaderboard as a standalone model but its accuracy is inferior.

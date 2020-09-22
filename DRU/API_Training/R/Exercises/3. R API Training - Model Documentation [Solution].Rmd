@@ -1,0 +1,120 @@
+---
+title: "3. R API Training - Model Documentation [Solution]"
+author: "Thodoris Petropoulos and Chester Ismay<br>Contributors: Rajiv Shah"
+output: github_document
+---
+
+This is the 3rd exercise to complete in order to finish your `R API Training for DataRobot` course! This exercise will help you learn how to retrieve model insights using the R API. These insights are normally readily available through the UI but you can also retrieve the raw results.
+
+Here are the actual sections of the notebook alongside time to complete: 
+
+1. Connect to DataRobot. [3min]<br>
+2. Retrieve the Project created during the `Feature Selection Curves` exercise. [5min]<br>
+3. Plot Feature Impact for any trained model. Show the model's blueprint.[10min]
+4. Plot any word cloud results. [10min]
+5. Plot ROC Curve data for the validation partition. [10min]
+6. Plot Lift Chart for the validation partition. [10min]
+7. Compute Prediction explanations for the training dataset. [10min]
+8. Bonus Question.
+
+Each section will have specific instructions so do not worry if things are still blurry!
+
+As always, consult:
+
+- [API Documentation via CRAN Vignettes](https://CRAN.R-project.org/package=datarobot)
+- [Samples](https://github.com/datarobot-community/examples-for-data-scientists)
+- [Tutorials](https://github.com/datarobot-community/tutorials-for-data-scientists)
+
+The last two links should provide you with the snippets you need to complete most of these exercises.
+
+<b>Data</b>
+
+The dataset we will be using throughout these exercises is the well-known `readmissions dataset`. You can access it or directly download it through DataRobot's public S3 bucket [here](https://s3.amazonaws.com/datarobot_public_datasets/10k_diabetes.csv).
+
+### Import Packages
+Import packages here as you start finding out what packages are needed. The DataRobot package is already included for your convenience.
+
+```{R}
+```
+
+### 1. Connect to DataRobot [3min]
+
+```{R}
+```
+
+### 2. Retrieve the Project created during the `Feature Selection Curves` exercise. [5min]<br>
+
+Retrieve the project you created using the readmissions dataset and save it into a variable called `project`.
+
+**Hint**: To use a project created in DataRobot you can either list all of the available projects using the R api or find the ID from the web interface. For example, if you are logged into DataRobot, your browser will be pointing to a link such as this: `https//:YOUR_HOSTNAME/projects/PROJECT_ID/models/MODEL_ID`. Just copy paste the `PROJECT_ID`.
+
+```{r eval=FALSE}
+```
+
+### 3. Plot Feature Impact for any trained model. Show the model's blueprint chart information.[10min]
+
+**Hint**: Modify your code from the previous exercise to produce a Feature Impact
+plot for a single model showing the top 10 features in terms of Feature Impact.
+
+**Hint 2**: Use the `GetModelBlueprintChart()` function for a high level representation of the Blueprint and `BlueprintChartToGraphviz()` to convert it
+to a graph format. Check out the `grViz()` function in the {DiagrammeR} package
+to produce a visual of the blueprint.
+
+```{r}
+```
+
+### 4. Plot any word cloud results. [10min]
+
+**Hint**: The function to retrieve the word cloud is `GetWordCloud()` and it is applied on a DataRobot Model object but not all of the models have a word cloud. Try to create a process that checks whether a model has a word cloud available and return the first available data.
+
+**Hint 2**: There is sample script of how to plot word cloud data within [Samples](https://github.com/datarobot-community/examples-for-data-scientists) under Model Evaluation.
+
+```{r}
+```
+
+```{r}
+```
+
+
+
+### 5. Plot ROC Curve data for the validation partition. [10min]
+
+**Hint**: After retrieving ROC data, call `pd.DataFrame(roc_data.roc_points)` function to transform the results into something easier to the eye.
+
+**Hint 2**: There is a sample script of how to plot the ROC curve within [Samples](https://github.com/datarobot-community/examples-for-data-scientists) under Model Evaluation.
+
+```{r}
+```
+
+```{r}
+```
+
+
+### 6. Plot Lift Chart for the validation partition. [10min]
+
+**Hint**: There is a sample script of how to plot the lift chart within [Samples](https://github.com/datarobot-community/examples-for-data-scientists) under Model Evaluation.
+
+```{r}
+```
+
+
+### 7. Compute Prediction Explanations for the training dataset. [10min]
+
+**Hint**: Similarly to before, there is a sample script of how to compute prediction explanations within [Samples](https://github.com/datarobot-community/examples-for-data-scientists).
+
+```{r}
+```
+
+```{r}
+```
+
+### Verification
+
+The first n-gram that is generated should be `hepatic` and the coefficient value should be around `0.1703`. Did you have the same result?
+
+### 8. Bonus Question
+
+DataRobot provides automated model documentation. Try to create and download the `Compliance Documentation` DOCX file.
+
+```{r}
+```

@@ -1,0 +1,86 @@
+---
+title: "7. R API Training - Using a Database [Solution]"
+author: "Thodoris Petropoulos and Chester Ismay<br>Contributors: Rajiv Shah"
+output: github_documentx
+---
+
+This is the 7th exercise to complete in order to finish your R API Training for DataRobot course! This exercise teaches you how to use a database in order to read datasets to train models or dump your predictions in a table.
+
+Here are the actual sections of the notebook alongside time to complete:
+
+1. Connect to DataRobot. [3min]
+2. Connect to the SQLite database provided. [5min]
+3. Load the `readmissions` dataset that needs scoring. [10min]
+4. Use one of the deployments generated earlier to score the dataset. [15min]
+5. Writeback predictions in the database
+
+As always, consult:
+
+- [API Documentation via CRAN Vignettes](https://CRAN.R-project.org/package=datarobot)
+[Samples](https://github.com/datarobot-community/examples-for-data-scientists) <br>
+[Tutorials](https://github.com/datarobot-community/tutorials-for-data-scientists)
+
+The last two links should provide you with the snippets you need to complete most of these exercises.
+
+**Data**
+
+The dataset used in the current exercise can be reached via `databases/test_database.db`
+
+### Import Packages
+Import packages here as you start finding out what packages are needed. The DataRobot package is already included for your convenience.
+
+```{r}
+```
+
+
+### 1. Connect to DataRobot. [3min]<br>
+
+```{r eval=FALSE}
+```
+
+```{r echo=FALSE}
+```
+
+
+#### 2. Connect to the SQLite database provided. [5min]
+
+The SQLite database is under the folder `databases` with filename `test_database.db`. To create a connection, use the `sqlite3` package. It becomes apparent that while using R, it really does not matter where your data is, you could just invoke the appropriate packages and load your data.
+
+```{r}
+```
+
+### 3. Load the readmissions dataset that needs scoring. [10min]
+The readmissions dataset is saved within the `test_database`.
+
+**Instructions** 
+1. Query the first 100 observations.
+2. Save them into a data frame that is outputted as a CSV.
+
+```{r}
+```
+
+
+#### 4. Use one of the deployments generated earlier to score the dataset. [15min]
+**Instructions**
+1. Navigate to `Deployments` page within DataRobot.
+2. Use the R code from the previous exercise to make a prediction with this deployment         
+    - specifying `filename` in the call to the `main()` function as this CSV file we just created from the first 100 rows of the readmissions table and
+    - updating the deployment ID with your value.
+3. Score the dataset and save the results in a new data frame.
+
+```{r}
+```
+
+```{r}
+```
+
+#### 5. Writeback predictions in the database
+
+**Instructions**
+1. Join the results table with the original data used to score
+2. Save the results in a table called `prediction_results` within the `test_database_db`
+
+**Hint**: Check out the {DBI} R package for ways to write tables to a database.
+
+```{r}
+```
