@@ -20,8 +20,6 @@ This repository contains various end to end use-case examples using the DataRobo
 
 - *Predict Medical Fraud:*  predict fraudulent medical claims with binary classification.   Connect to a SQL database, create a data store, write custom functions to build multiple projects, conduct anomaly detection and deploy the model using the prediction server. Save the results for a custom dashboard. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Classification/Python/predicting_fraud_medical_claims/src/Predicting%20Fraud%20Medical%20Claims.ipynb)
 
-- *Detecting Droids with DataRobot:* Create a VisualAI project to classify images of droids and create a custom shiny application.  Build file paths to images and set up folders for VisualAI.  Import that data in the platform and create image classification models.  Get evaluation metrics and plot them with ggplot.  Create a deployment using the prediction server.  Make a shiny app that hits the deployment. [R](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Classification/R/Detecting%20Droids/src/Droids%20Demo/Droids_R.Rmd)
-
 - *Lead Scoring Bank Marketing:* predict which customers are likely to purchase a product or service in response to a bank telemarketing campaign.  Upload data, create a project, get and plot the ROC curve and Feature Impact.  Get the holdout predictions. [R](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Classification/R/Lead%20Scoring%20Bank%20Marketing/Lead_Scoring.Rmd)
 
 ### DRU 
@@ -75,6 +73,12 @@ The list of exercises is as follows:
 ### Time Series
 
 - *Forecasting US COVID-19 Cases Using Time-Series:*  create an AutoTS model on historical data taken from the US, France and Spain.  Clean and prepare the data. Create the time series project and build models. Forecast 10 days ahead for each country an write the results to a .csv file. [R](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Time%20Series/COVID%20Time%20Series%20Forecasting%20in%20R/COVID%20Time%20Series%20Forecasting%20With%20R/COVID_TS.Rmd)
+
+### VisualAI 
+- *VisualAI Heartbeats:* Create a VisualAI project to classify images of sound.  Heartbeats of people with normal and atypical heart conditions were recorded onto .wav files.  This code shows you how to create spectrograms from the images and import them into DataRobot for VisualAI classification.  [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/blob/visualAI_changes/VisualAI/Python/VisualAI%20Heartbeats/heartbeat_visual_AI.ipynb)
+
+- *Detecting Droids with DataRobot:* Create a VisualAI project to classify images of droids and create a custom shiny application.  Build file paths to images and set up folders for VisualAI.  Import that data in the platform and create image classification models.  Get evaluation metrics and plot them with ggplot.  Create a deployment using the prediction server.  Make a shiny app that hits the deployment. [R](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/blob/visualAI_changes/VisualAI/R/Detecting%20Droids/src/Droids%20Demo/Droids_R.Rmd)
+
 
 ### Integrations
 
