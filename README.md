@@ -79,6 +79,8 @@ The list of exercises is as follows:
 
 - *Detecting Droids with DataRobot:* Create a VisualAI project to classify images of droids and create a custom shiny application.  Build file paths to images and set up folders for VisualAI.  Import that data in the platform and create image classification models.  Get evaluation metrics and plot them with ggplot.  Create a deployment using the prediction server.  Make a shiny app that hits the deployment. [R](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/blob/visualAI_changes/VisualAI/R/Detecting%20Droids/src/Droids%20Demo/Droids_R.Rmd)
 
+### Unsupervised Learning
+- *Anti Money Laundering with Outlier Detection:* Create an unsupervised model that can predict money laundering related transactions. Use a small set of labeled data to evaluate how the different models can perform. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/tree/master/Unsupervised%20Learning/Python/Anti%20Money%20Laundering%20with%20Outlier%20Detection)
 
 ### Integrations
 
