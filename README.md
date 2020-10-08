@@ -62,6 +62,8 @@ The list of exercises is as follows:
 
 - *Multiclass one-vs-rest Modeling:*  create a one-vs-rest model to do geophysical classification with 9 potential classes.  Preprocess the data and split up the dataset. Use a loop to build nine projects and put the result into a dataframe  Then get the predictions and plot them with an advanced visualization technique. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Multiclass%20Classification/one-vs-rest-with-datarobot/src/One%20vs%20Rest%20with%20DataRobot.ipynb)
 
+- *Predicting Product Type Based on Customer Complaints* Use the transcript of customer complaints to predict which product the customers are adressing. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/Predict%20Product%20Type%20Based%20on%20Customer%20Complaints)
+
 ### Out of Time Validation (OTV)
 
 - *Predict C02 levels of Mauna Loa:*  create an OTV project to predict C02 levels.  This project trains on older data and then validates on newer data.  This strategy is done because scientists in this case know that the data changes.  Import your data, create lagged features, define date-time partitioning, select a model and get Feature Impact. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Multiclass%20Classification/one-vs-rest-with-datarobot/src/One%20vs%20Rest%20with%20DataRobot.ipynb)
