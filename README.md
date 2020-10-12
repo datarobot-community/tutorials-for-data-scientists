@@ -62,7 +62,7 @@ The list of exercises is as follows:
 
 - *Multiclass one-vs-rest Modeling:*  create a one-vs-rest model to do geophysical classification with 9 potential classes.  Preprocess the data and split up the dataset. Use a loop to build nine projects and put the result into a dataframe  Then get the predictions and plot them with an advanced visualization technique. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Multiclass%20Classification/one-vs-rest-with-datarobot/src/One%20vs%20Rest%20with%20DataRobot.ipynb)
 
-- *Predicting Product Type Based on Customer Complaints* Use the transcript of customer complaints to predict which product the customers are adressing. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/Predict%20Product%20Type%20Based%20on%20Customer%20Complaints)
+- *Predicting Product Type Based on Customer Complaints* Use the **free text** from customer complaints to predict which product the customers are adressing. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Multiclass%20Classification/Predict%20Product%20Type%20Based%20on%20Customer%20Complaints)
 
 ### Out of Time Validation (OTV)
 
@@ -81,7 +81,7 @@ The list of exercises is as follows:
 
 - *Detecting Droids with DataRobot:* Create a VisualAI project to classify images of droids and create a custom shiny application.  Build file paths to images and set up folders for VisualAI.  Import that data in the platform and create image classification models.  Get evaluation metrics and plot them with ggplot.  Create a deployment using the prediction server.  Make a shiny app that hits the deployment. [R](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/blob/visualAI_changes/VisualAI/R/Detecting%20Droids/src/Droids%20Demo/Droids_R.Rmd)
 
-### Unsupervised Learning
+### Anomaly Detection
 - *Anti Money Laundering with Outlier Detection:* Create an unsupervised model that can predict money laundering related transactions. Use a small set of labeled data to evaluate how the different models can perform. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Unsupervised%20Learning/Python/Anti%20Money%20Laundering%20with%20Outlier%20Detection)
 
 ### Integrations
