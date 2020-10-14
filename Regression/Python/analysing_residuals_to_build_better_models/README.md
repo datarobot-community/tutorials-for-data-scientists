@@ -1,5 +1,9 @@
-#### Analysing Residuals to build better models
+# Analysing Residuals to build better models
 
-**Scope**: The scope of this notebook is to provide a short overview on how to check residuals and improve the model results.
+Residuals are used universally for regression problems. They are used to both evaluate how well the model is performing and also look at ways to make it better. In this example, we will be building models to predict used car price and then look at the residuals to see how we can make our models better.
 
-**Requirements:** Python 3.8; DataRobot python client version 2.22.1
+### Getting Started
+You will find all of the code within the Notebook file.
+
+### Problem Type
+Regression
