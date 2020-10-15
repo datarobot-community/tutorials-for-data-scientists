@@ -74,7 +74,9 @@ The list of exercises is as follows:
 
 ### Time Series
 
-- *Forecasting US COVID-19 Cases Using Time-Series:*  create an AutoTS model on historical data taken from the US, France and Spain.  Clean and prepare the data. Create the time series project and build models. Forecast 10 days ahead for each country an write the results to a .csv file. [R](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Time%20Series/COVID%20Time%20Series%20Forecasting%20in%20R/COVID%20Time%20Series%20Forecasting%20With%20R/COVID_TS.Rmd)
+- *Forecasting US COVID-19 Cases Using Time-Series:*  Create an AutoTS model on historical data taken from the US, France and Spain.  Clean and prepare the data. Create the time series project and build models. Forecast 10 days ahead for each country an write the results to a .csv file. [R](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Time%20Series/COVID%20Time%20Series%20Forecasting%20in%20R/COVID%20Time%20Series%20Forecasting%20With%20R/COVID_TS.Rmd)
+
+- *Analysing Residuals to build better models:* Use residuals created by DataRobot insights to evaluate your models and make them better. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/tree/master/Regression/Python/analysing_residuals_to_build_better_models)
 
 ### VisualAI 
 - *VisualAI Heartbeats:* Create a VisualAI project to classify images of sound.  Heartbeats of people with normal and atypical heart conditions were recorded onto .wav files.  This code shows you how to create spectrograms from the images and import them into DataRobot for VisualAI classification.  [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/blob/visualAI_changes/VisualAI/Python/VisualAI%20Heartbeats/heartbeat_visual_AI.ipynb)
@@ -82,6 +84,7 @@ The list of exercises is as follows:
 - *Detecting Droids with DataRobot:* Create a VisualAI project to classify images of droids and create a custom shiny application.  Build file paths to images and set up folders for VisualAI.  Import that data in the platform and create image classification models.  Get evaluation metrics and plot them with ggplot.  Create a deployment using the prediction server.  Make a shiny app that hits the deployment. [R](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/blob/visualAI_changes/VisualAI/R/Detecting%20Droids/src/Droids%20Demo/Droids_R.Rmd)
 
 ### Anomaly Detection (Unsupervised Learning)
+
 - *Anti Money Laundering with Outlier Detection:* Create an unsupervised model that can predict money laundering related transactions. Use a small set of labeled data to evaluate how the different models can perform. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Anomaly%20Detection%20(Unsupervised%20Learning))
 
 ### Integrations
@@ -89,6 +92,10 @@ The list of exercises is as follows:
 - *Amazon Web Services (AWS):*  This repository has a number of solutions for using DataRobot with AWS. Use DataRobot prime and scoring code models with AWS Lambda. Also use DataRobot scoring code models with AWS Sagemaker. [cURL](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/integrations/AWS%20(Amazon%20Web%20Services)/readme.md)
 
 - *Database Connections and Writebacks:* DataRobot provides a “self-service” JDBC product for database connectivity setup. Once configured, you can read data from production databases for model building and predictions. This allows you to quickly train and retrain models on that data, and avoids the unnecessary step of exporting data from your enterprise database to a CSV for ingest to DataRobot. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/integrations/Database%20Connections%20and%20Writebacks/databases_and_deployment.ipynb)
+
+### Feature Discovery
+
+- *Feature Discovery  with Instacart Dataset:* An example of how to use Feature Discovery through the Python API. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/tree/master/Feature%20Discovery/Feature%20Discovery%20%20with%20Instacart%20Dataset)
 
 ## Development and Contributing
 
