@@ -72,11 +72,11 @@ The list of exercises is as follows:
 
 - *Double Pendulum with Eureqa Models:* solve a regression problem using Eureqa blueprints. Eureqa makes no prior assumptions about the data set, instead fitting - models to the data dynamically. The models are presented as mathematical equations, so end users can seamlessly understand results and recommendations. Setup a manual mode project and select Eureqa blueprints from the repository. Advance tune the default model and print the mathematical expression. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Regression/Python/double_pendulum_with_eureqa/src/Double%20Pendulum%20with%20Eureqa%20Models.ipynb)
 
+- *Analysing Residuals to build better models:* Use residuals created by DataRobot insights to evaluate your models and make them better. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Regression/Python/analysing_residuals_to_build_better_models)
+
 ### Time Series
 
 - *Forecasting US COVID-19 Cases Using Time-Series:*  Create an AutoTS model on historical data taken from the US, France and Spain.  Clean and prepare the data. Create the time series project and build models. Forecast 10 days ahead for each country an write the results to a .csv file. [R](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Time%20Series/COVID%20Time%20Series%20Forecasting%20in%20R/COVID%20Time%20Series%20Forecasting%20With%20R/COVID_TS.Rmd)
-
-- *Analysing Residuals to build better models:* Use residuals created by DataRobot insights to evaluate your models and make them better. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/tree/master/Regression/Python/analysing_residuals_to_build_better_models)
 
 ### VisualAI 
 - *VisualAI Heartbeats:* Create a VisualAI project to classify images of sound.  Heartbeats of people with normal and atypical heart conditions were recorded onto .wav files.  This code shows you how to create spectrograms from the images and import them into DataRobot for VisualAI classification.  [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/blob/visualAI_changes/VisualAI/Python/VisualAI%20Heartbeats/heartbeat_visual_AI.ipynb)
@@ -95,7 +95,7 @@ The list of exercises is as follows:
 
 ### Feature Discovery
 
-- *Feature Discovery  with Instacart Dataset:* An example of how to use Feature Discovery through the Python API. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists-wip/tree/master/Feature%20Discovery/Feature%20Discovery%20%20with%20Instacart%20Dataset)
+- *Feature Discovery  with Instacart Dataset:* An example of how to use Feature Discovery through the Python API. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Feature%20Discovery/Feature%20Discovery%20%20with%20Instacart%20Dataset)
 
 ## Development and Contributing
 
