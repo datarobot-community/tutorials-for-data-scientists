@@ -1,0 +1,1732 @@
+{
+  "paragraphs": [
+    {
+      "title": "",
+      "text": "%md\n\u003ch3 style\u003d\"background-color: red; color: white; text-align: center\"\u003e\u003cb\u003ePSM Demo #2: Logistic vs ML Profit Comparison\u003c/b\u003e\u003c/h3\u003e",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:04:56.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cp\u003e\u003ch3 style\u003d\"background-color: red; color: white; text-align: center\"\u003e\u003cb\u003ePSM Demo #2: Logistic vs ML Profit Comparison\u003c/b\u003e\u003c/h3\u003e\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-183221_1354586199",
+      "dateCreated": "2021-05-29 18:32:21.000",
+      "dateStarted": "2021-05-29 21:04:56.000",
+      "dateFinished": "2021-05-29 21:04:56.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### *Scenario*\n\nPropensity Score Matching (PSM) is a 2-step technique for quasi-experimentation. Traditionally, a logitistic regression on treatment is estimated in the first step, without reference to the true target variable. In the 2nd step experimental statistics such as Average Effect of Treatment on the Treated (ATT) are estimated on a matched and pruned sample.\n\nThis demo illustrates the value of replacing the 1st step\u0027s logistic regression with Machine Learning (ML) via DataRobot. A modified copy of the Lending Club data set is used, wherein executives want to know the effect of a certain \u0027treatment\u0027 (marketing outreach, called \"Tr\" in the data) on the number of referrals received from each existing customer (\"num_referrals\"). Treatment can not be truly randomized, thus PSM is used to reduce bias in selection as well as model specification. \n\nThe expected (average) value of a referral is $900. There is an 800 dollar cost per customer associated with treatment. There are 9,824 customers in the data set, of whom 293 were included in the pilot of the marketing campaign (i.e. 293 treated). During the Data Generation Process (DGP) the treatment effect was defined as 0.75 (75% of 1 referral).\n\nFor an introduction to Quasi-Experiments and PSM with DataRobot check out Demo #1:\n\nhttps://app.zepl.com/ODFHKV0LJ/notebooks/e1be0bcb11264260bede11649f0795ec\n",
+      "user": "",
+      "dateUpdated": "2021-06-01 02:09:00.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003e\u003cem\u003eScenario\u003c/em\u003e\u003c/h3\u003e\n\n\u003cp\u003ePropensity Score Matching (PSM) is a 2-step technique for quasi-experimentation. Traditionally, a logitistic regression on treatment is estimated in the first step, without reference to the true target variable. In the 2nd step experimental statistics such as Average Effect of Treatment on the Treated (ATT) are estimated on a matched and pruned sample.\u003c/p\u003e\n\n\u003cp\u003eThis demo illustrates the value of replacing the 1st step\u0026rsquo;s logistic regression with Machine Learning (ML) via DataRobot. A modified copy of the Lending Club data set is used, wherein executives want to know the effect of a certain \u0026lsquo;treatment\u0026rsquo; (marketing outreach, called \u0026ldquo;Tr\u0026rdquo; in the data) on the number of referrals received from each existing customer (\u0026ldquo;num_referrals\u0026rdquo;). Treatment can not be truly randomized, thus PSM is used to reduce bias in selection as well as model specification.\u003c/p\u003e\n\n\u003cp\u003eThe expected (average) value of a referral is $900. There is an 800 dollar cost per customer associated with treatment. There are 9,824 customers in the data set, of whom 293 were included in the pilot of the marketing campaign (i.e. 293 treated). During the Data Generation Process (DGP) the treatment effect was defined as 0.75 (75% of 1 referral).\u003c/p\u003e\n\n\u003cp\u003eFor an introduction to Quasi-Experiments and PSM with DataRobot check out Demo #1:\u003c/p\u003e\n\n\u003cp\u003e\u003ca href\u003d\"https://app.zepl.com/ODFHKV0LJ/notebooks/e1be0bcb11264260bede11649f0795ec\"\u003ehttps://app.zepl.com/ODFHKV0LJ/notebooks/e1be0bcb11264260bede11649f0795ec\u003c/a\u003e\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-183346_130257512",
+      "dateCreated": "2021-05-29 18:33:46.000",
+      "dateStarted": "2021-06-01 02:09:00.000",
+      "dateFinished": "2021-06-01 02:09:00.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eImport Raw Data and Connect to DataRobot\u003c/b\u003e\u003c/h3\u003e",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:17:56.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cp\u003e\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eImport Raw Data and Connect to DataRobot\u003c/b\u003e\u003c/h3\u003e\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210601-011712_1960445652",
+      "dateCreated": "2021-06-01 01:17:12.000",
+      "dateStarted": "2021-06-01 01:17:56.000",
+      "dateFinished": "2021-06-01 01:17:56.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\n### Load Libaries \u0026 Connect to DR",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:35:27.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 5.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eLoad Libaries \u0026amp; Connect to DR\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-213439_1222210897",
+      "dateCreated": "2021-05-29 21:34:39.000",
+      "dateStarted": "2021-05-29 21:35:27.000",
+      "dateFinished": "2021-05-29 21:35:27.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%python\nimport datarobot as dr\nimport seaborn as sns\nimport pandas as pd\nimport matplotlib.pyplot as plt",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:19:52.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS"
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212016_1002931388",
+      "dateCreated": "2021-05-29 21:20:16.000",
+      "dateStarted": "2021-06-01 01:19:52.000",
+      "dateFinished": "2021-06-01 01:19:52.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "# Credentials\nMAIN_CREDS \u003d z.getDatasource(\"JM_DR\")\nMAIN_TOKEN \u003d MAIN_CREDS[\"token\"]\nDEMO_CREDS \u003d z.getDatasource(\"JM_DR_Demo\")\nDEMO_TOKEN \u003d DEMO_CREDS[\"token\"]\n\n# Connect\ndr.Client(token\u003dDEMO_TOKEN , endpoint\u003d\u0027https://app.datarobot.com/api/v2\u0027)",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:19:55.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "editorLanguage": "r",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "spark.r",
+          "profile": "r"
+        },
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cdatarobot.rest.RESTClientObject at 0x7fcde400e790\u003e",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-183440_1726479906",
+      "dateCreated": "2021-05-29 18:34:40.000",
+      "dateStarted": "2021-06-01 01:19:53.000",
+      "dateFinished": "2021-06-01 01:19:55.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Import the Raw Data",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:35:27.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 4.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eImport the Raw Data\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-213503_426948496",
+      "dateCreated": "2021-05-29 21:35:03.000",
+      "dateStarted": "2021-05-29 21:35:27.000",
+      "dateFinished": "2021-05-29 21:35:27.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "!wget http://zdata/lending_club_psm_jm.csv",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:20:00.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "results": [
+          {},
+          {},
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "--2021-06-01 01:20:00--  http://zdata/lending_club_psm_jm.csv\r\nResolving zdata (zdata)... 127.0.0.1\r\nConnecting to zdata (zdata)|127.0.0.1|:80... connected.\r\nHTTP request sent, awaiting response... \n",
+            "type": "TEXT"
+          },
+          {
+            "data": "200 OK\r\nLength: unspecified [text/plain]\r\nSaving to: \u0027lending_club_psm_jm.csv.2\u0027\r\n\r\n\r          lending_c     [\u003c\u003d\u003e                 ]       0  --.-KB/s               \rlending_club_psm_jm     [ \u003c\u003d\u003e                ] 297.17K  --.-KB/s    in 0.001s  \r\n\r\n2021-06-01 01:20:00 (321 MB/s) - \u0027lending_club_psm_jm.csv.2\u0027 saved [304305]\r\n\r\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212036_1336537363",
+      "dateCreated": "2021-05-29 21:20:36.000",
+      "dateStarted": "2021-06-01 01:20:00.000",
+      "dateFinished": "2021-06-01 01:20:00.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "# Even with a custom feature list, DR won\u0027t completely ignore the target column like we\u0027ll want,\n#   so we need to drop it from a copy of the data set\ndata \u003d pd.read_csv(\u0027lending_club_psm_jm.csv\u0027)\n  \n# drop the target\ndata.drop(\u0027num_referrals\u0027, inplace\u003dTrue, axis\u003d1)\nprint(data)\n\n# write a CSV of the subset of data\ndata.to_csv(\u0027lending_club_psm_no_target_jm.csv\u0027)\n",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:20:14.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "     home_ownership  annual_inc pymnt_plan addr_state  total_acc  Tr\n0              RENT     50000.0          n         NC          9   0\n1              RENT     34200.0          n         IL         31   0\n2              RENT     30000.0          n         FL          8   0\n3          MORTGAGE     51000.0          n         NY         23   0\n4              RENT     44004.0          n         CA         32   0\n...             ...         ...        ...        ...        ...  ..\n9889           RENT     49008.0          n         TX         16   0\n9890           RENT     50000.0          n         SC          9   0\n9891            OWN     83000.0          n         CA         45   1\n9892            OWN    100000.0          n         FL         33   1\n9893           RENT     62000.0          n         MD         21   0\n\n[9894 rows x 6 columns]\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212105_1249270385",
+      "dateCreated": "2021-05-29 21:21:05.000",
+      "dateStarted": "2021-06-01 01:20:14.000",
+      "dateFinished": "2021-06-01 01:20:14.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%r\nmodel.data   \u003c- read.csv(\"lending_club_psm_no_target_jm.csv\",stringsAsFactors \u003d T)\nmodel.data$X \u003c- NULL # drop rowid\n\nsummary(model.data)",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:21:10.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "editorLanguage": "r",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "spark.r",
+          "profile": "r"
+        },
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\nhome_ownership   annual_inc     pymnt_plan   addr_state     total_acc\n MORTGAGE:4404   Min.   :  2000   n:9892     CA     :1728   Min.   : 1.0\n OTHER   :  33   1st Qu.: 40000   y:   2     NY     : 953   1st Qu.:13.0\n OWN     : 765   Median : 58000              FL     : 701   Median :20.0\n RENT    :4692   Mean   : 68157              TX     : 696   Mean   :22.1\n                 3rd Qu.: 82000              NJ     : 479   3rd Qu.:29.0\n                 Max.   :900000              VA     : 389   Max.   :90.0\n                                             (Other):4948\n       Tr\n Min.   :0.00000\n 1st Qu.:0.00000\n Median :0.00000\n Mean   :0.02961\n 3rd Qu.:0.00000\n Max.   :1.00000  \n\n\n\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212503_1347341249",
+      "dateCreated": "2021-05-29 21:25:03.000",
+      "dateStarted": "2021-06-01 01:21:10.000",
+      "dateFinished": "2021-06-01 01:21:10.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eTraditional Logistic Regression Propensity Score Model\u003c/b\u003e\u003c/h3\u003e",
+      "user": "",
+      "dateUpdated": "2021-05-30 01:18:54.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cp\u003e\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eTraditional Logistic Regression Propensity Score Model\u003c/b\u003e\u003c/h3\u003e\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212433_1516642563",
+      "dateCreated": "2021-05-29 21:24:33.000",
+      "dateStarted": "2021-05-30 01:18:54.000",
+      "dateFinished": "2021-05-30 01:18:54.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%r\n\nps \u003c- glm(\"Tr ~ annual_inc + pymnt_plan + total_acc + home_ownership\", data \u003d model.data, family \u003d binomial)\nsummary(ps)\n\nsaveRDS(ps, \"logitistic.RDS\")",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:22:34.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "spark.r",
+          "profile": "r",
+          "isCustom": false,
+          "editorLanguage": "r",
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\nCall:\nglm(formula \u003d “Tr ~ annual_inc + pymnt_plan + total_acc + home_ownership”, \n    family \u003d binomial, data \u003d model.data)\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max\n-2.7003  -0.1031  -0.0827  -0.0676   3.7301  \n\nCoefficients:\n                      Estimate Std. Error z value Pr(\u0026gt;|z|)\n(Intercept)         -7.488e+00  3.413e-01 -21.937  \u0026lt; 2e-16 ***\nannual_inc           1.017e-05  1.046e-06   9.719  \u0026lt; 2e-16 ***\npymnt_plany         -1.166e+01  1.690e+03  -0.007  0.99450\ntotal_acc            2.833e-02  6.049e-03   4.684 2.81e-06 ***\nhome_ownershipOTHER -1.036e+01  4.138e+02  -0.025  0.98003\nhome_ownershipOWN    5.509e+00  2.818e-01  19.549  \u0026lt; 2e-16 ***\n\nhome_ownershipRENT   1.003e+00  3.240e-01   3.097  0.00196 ** \n\nSignif. codes:  0 \u0027**\u0027 0.001 \u0027\u0027 0.01 \u0027\u0027 0.05 \u0027.\u0027 0.1 \u0027 \u0027 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\nNull deviance: 2639.7  on 9893  degrees of freedom\n\n\nResidual deviance: 1410.0  on 9887  degrees of freedom\nAIC: 1424\n\nNumber of Fisher Scoring iterations: 15\n\n\n\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212814_1843057927",
+      "dateCreated": "2021-05-29 21:28:14.000",
+      "dateStarted": "2021-06-01 01:22:28.000",
+      "dateFinished": "2021-06-01 01:22:33.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%r \n\n# Score the data\nmodel.data$score \u003c- predict(ps, type \u003d \"r\")\n\nsummary(model.data)\n\n# Write out the scored file\nwrite.csv(model.data, \"logit_scored_file_no_target_jm.csv\", row.names \u003d F)",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:22:40.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "spark.r",
+          "profile": "r",
+          "isCustom": false,
+          "editorLanguage": "r",
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\nhome_ownership   annual_inc     pymnt_plan   addr_state     total_acc\n MORTGAGE:4404   Min.   :  2000   n:9892     CA     :1728   Min.   : 1.0\n OTHER   :  33   1st Qu.: 40000   y:   2     NY     : 953   1st Qu.:13.0\n OWN     : 765   Median : 58000              FL     : 701   Median :20.0\n RENT    :4692   Mean   : 68157              TX     : 696   Mean   :22.1\n                 3rd Qu.: 82000              NJ     : 479   3rd Qu.:29.0\n                 Max.   :900000              VA     : 389   Max.   :90.0\n                                             (Other):4948\n       Tr              score\n Min.   :0.00000   Min.   :0.000000\n 1st Qu.:0.00000   1st Qu.:0.002421\n Median :0.00000   Median :0.003561\n Mean   :0.02961   Mean   :0.029614\n 3rd Qu.:0.00000   3rd Qu.:0.005686\n Max.   :1.00000   Max.   :0.994504  \n\n\n\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-213008_1308168996",
+      "dateCreated": "2021-05-29 21:30:08.000",
+      "dateStarted": "2021-06-01 01:22:40.000",
+      "dateFinished": "2021-06-01 01:22:40.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\nNow let\u0027s estimate the same PS model using DataRobot. We\u0027ll try matching using both sets of scores and compare results.",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:33:23.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cp\u003eNow let\u0026rsquo;s estimate the same PS model using DataRobot. We\u0026rsquo;ll try matching using both sets of scores and compare results.\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-213211_1894618528",
+      "dateCreated": "2021-05-29 21:32:11.000",
+      "dateStarted": "2021-05-29 21:33:23.000",
+      "dateFinished": "2021-05-29 21:33:23.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eDataRobot Propensity Score Modeling\u003c/b\u003e\u003c/h3\u003e",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:24:23.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cp\u003e\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eDataRobot Propensity Score Modeling\u003c/b\u003e\u003c/h3\u003e\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212325_7016214",
+      "dateCreated": "2021-05-29 21:23:25.000",
+      "dateStarted": "2021-05-29 21:24:23.000",
+      "dateFinished": "2021-05-29 21:24:23.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Add the Data to AI Catalog \u0026 Start a New Project",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:36:53.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 7.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eAdd the Data to AI Catalog \u0026amp; Start a New Project\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-213626_2145684307",
+      "dateCreated": "2021-05-29 21:36:26.000",
+      "dateStarted": "2021-05-29 21:36:53.000",
+      "dateFinished": "2021-05-29 21:36:53.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "# send the new data set to AI Catalog\ndataset \u003d dr.Dataset.create_from_file(file_path\u003d\u0027lending_club_psm_no_target_jm.csv\u0027)",
+      "user": "",
+      "dateUpdated": "2021-05-31 23:45:08.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS"
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212244_1249679125",
+      "dateCreated": "2021-05-29 21:22:44.000",
+      "dateStarted": "2021-05-31 23:44:24.000",
+      "dateFinished": "2021-05-31 23:45:08.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "project \u003d dr.Project.create_from_dataset(dataset.id, project_name\u003d\u0027Zepl NB: PSM Demo 2 (v0.7)\u0027)",
+      "user": "",
+      "dateUpdated": "2021-05-31 01:29:01.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "python",
+          "profile": "python",
+          "isCustom": false,
+          "editorLanguage": "python",
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "isDefault": true
+        },
+        "colWidth": 12.0,
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS"
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212145_737726233",
+      "dateCreated": "2021-05-29 21:21:45.000",
+      "dateStarted": "2021-05-31 01:28:39.000",
+      "dateFinished": "2021-05-31 01:29:01.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "# Set target to treatment flag, create a feature list, and run the project\nproject.set_target(target\u003d\u0027Tr\u0027, # this is our treatment vs control flag\n                   metric\u003d\u0027LogLoss\u0027,\n                   mode\u003ddr.AUTOPILOT_MODE.FULL_AUTO)\n                   ",
+      "user": "",
+      "dateUpdated": "2021-05-31 01:29:56.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "tableHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "Project(Zepl NB: PSM Demo 2 (v0.5))",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-212259_1825611549",
+      "dateCreated": "2021-05-29 21:22:59.000",
+      "dateStarted": "2021-05-31 01:29:01.000",
+      "dateFinished": "2021-05-31 01:29:56.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "featurelist \u003d project.create_featurelist(\u0027Omit the Target for Matching\u0027, [\u0027home_ownership\u0027, \u0027annual_inc\u0027,  \u0027addr_state\u0027, \u0027Tr\u0027, \u0027pymnt_plan\u0027])\nproject.set_worker_count(-1)\nproject.start_autopilot(featurelist.id) # optional: add wait for autopilot to complete",
+      "user": "",
+      "dateUpdated": "2021-05-31 01:29:59.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "python",
+          "profile": "python",
+          "isCustom": false,
+          "editorLanguage": "python",
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "isDefault": true
+        },
+        "colWidth": 12.0,
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS"
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210530-212456_1615412214",
+      "dateCreated": "2021-05-30 21:24:56.000",
+      "dateStarted": "2021-05-31 01:29:57.000",
+      "dateFinished": "2021-05-31 01:29:59.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Cross-Validate All Models",
+      "user": "",
+      "dateUpdated": "2021-05-30 21:23:18.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 4.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eCross-Validate All Models\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-214521_993887899",
+      "dateCreated": "2021-05-29 21:45:21.000",
+      "dateStarted": "2021-05-30 21:23:18.000",
+      "dateFinished": "2021-05-30 21:23:18.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "lb \u003d project.get_models()\n\nfor model in lb:\n    try:\n        model.cross_validate()\n    except:\n        pass",
+      "user": "",
+      "dateUpdated": "2021-05-31 01:30:00.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS"
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-214503_362887465",
+      "dateCreated": "2021-05-29 21:45:03.000",
+      "dateStarted": "2021-05-31 01:29:59.000",
+      "dateFinished": "2021-05-31 01:30:00.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Unlock Holdouts",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:46:40.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 3.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eUnlock Holdouts\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-214551_196440308",
+      "dateCreated": "2021-05-29 21:45:51.000",
+      "dateStarted": "2021-05-29 21:46:40.000",
+      "dateFinished": "2021-05-29 21:46:40.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "project.unlock_holdout()",
+      "user": "",
+      "dateUpdated": "2021-05-31 01:30:02.000",
+      "config": {
+        "selectedInterpreter": {},
+        "colWidth": 12.0,
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "Project(Zepl NB: PSM Demo 2 (v0.5))",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-214635_1433212385",
+      "dateCreated": "2021-05-29 21:46:35.000",
+      "dateStarted": "2021-05-31 01:30:00.000",
+      "dateFinished": "2021-05-31 01:30:02.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Get the Best Model and Learn About It",
+      "user": "",
+      "dateUpdated": "2021-05-29 21:46:47.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 6.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eGet the Best Model and Learn About It\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-214606_1009990327",
+      "dateCreated": "2021-05-29 21:46:06.000",
+      "dateStarted": "2021-05-29 21:46:47.000",
+      "dateFinished": "2021-05-29 21:46:47.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "# Resume (if notebook has been stopped):\nproject \u003d dr.Project.get(\u002760b43bc75ef7eff1f9040497\u0027)\n\n# To do: make this more programmatic\nmodel \u003d dr.Model.get(project\u003dproject.id,\n                     model_id\u003d\"60b440383485bc0bde069677\")",
+      "user": "",
+      "dateUpdated": "2021-06-01 03:11:54.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS"
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224102_153724760",
+      "dateCreated": "2021-05-29 22:41:02.000",
+      "dateStarted": "2021-06-03 14:33:40.000",
+      "dateFinished": "2021-06-01 03:11:54.000",
+      "status": "ABORT",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "#Get Feature Impact\nfeature_impact \u003d model.get_or_request_feature_impact()\n\n#Save feature impact in pandas dataframe\nfi_df \u003d pd.DataFrame(feature_impact)\n\n#Dispaly using Zepl\u0027s built in Vizualizations\nz.show(fi_df)",
+      "user": "",
+      "dateUpdated": "2021-05-31 02:22:01.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "python",
+          "profile": "python",
+          "isCustom": false,
+          "editorLanguage": "python",
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "isDefault": true
+        },
+        "colWidth": 12.0,
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "Index\tredundantWith\tfeatureName\timpactNormalized\timpactUnnormalized\n%html \u003cstrong\u003e0\u003c/strong\u003e\tNone\thome_ownership\t1.0\t0.4272574435290796\n%html \u003cstrong\u003e1\u003c/strong\u003e\tNone\tannual_inc\t0.45020166655047994\t0.1923520131228892\n",
+            "type": "TABLE"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224119_1082432755",
+      "dateCreated": "2021-05-29 22:41:19.000",
+      "dateStarted": "2021-05-31 02:21:59.000",
+      "dateFinished": "2021-05-31 02:22:01.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Deploy",
+      "user": "",
+      "dateUpdated": "2021-05-29 22:42:33.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 4.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eDeploy\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224201_1281275714",
+      "dateCreated": "2021-05-29 22:42:01.000",
+      "dateStarted": "2021-05-29 22:42:33.000",
+      "dateFinished": "2021-05-29 22:42:33.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "prediction_server \u003d dr.PredictionServer.list()[0]\n\ndeployment \u003d dr.Deployment.create_from_learning_model(\n    model.id, label\u003d\u0027PSM Demo 2 Deployment\u0027, description\u003d\u0027Deployment for Zepl NB PSM Demo #2 (v0.6)\u0027,\n    default_prediction_server_id\u003dprediction_server.id)\ndeployment # 60b43e2bfd805d815fa89f73",
+      "user": "",
+      "dateUpdated": "2021-05-31 02:22:24.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "colWidth": 12.0,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "Deployment(PSM Demo 2 Deployment)",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224141_1166001491",
+      "dateCreated": "2021-05-29 22:41:41.000",
+      "dateStarted": "2021-05-31 02:22:20.000",
+      "dateFinished": "2021-05-31 02:22:24.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Propensity Scoring",
+      "user": "",
+      "dateUpdated": "2021-05-29 22:53:24.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 3.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003ePropensity Scoring\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224304_1763079908",
+      "dateCreated": "2021-05-29 22:43:04.000",
+      "dateStarted": "2021-05-29 22:53:24.000",
+      "dateFinished": "2021-05-29 22:53:24.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "deploymentid \u003d \u002760b4485d659b85d960180b32\u0027 \ndr.BatchPredictionJob.score_to_file(\n    deploymentid,\n    \u0027lending_club_psm_no_target_jm.csv\u0027,\n    \u0027./scored_results_60b4485d659b85d960180b32.csv\u0027)",
+      "user": "",
+      "dateUpdated": "2021-06-01 03:11:54.000",
+      "config": {
+        "colWidth": 12.0,
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.python.PythonInterpreter",
+          "editorLanguage": "python",
+          "isCustom": false,
+          "isDefault": true,
+          "name": "python",
+          "profile": "python"
+        },
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS"
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224355_335529559",
+      "dateCreated": "2021-05-29 22:43:55.000",
+      "dateStarted": "2021-06-03 14:33:40.000",
+      "dateFinished": "2021-06-01 03:11:54.000",
+      "status": "ABORT",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n### Inspect Model Performance Using ML Practices (not normally done in PSM)",
+      "user": "",
+      "dateUpdated": "2021-05-29 22:56:16.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 9.0,
+        "editorHide": true,
+        "results": [
+          {
+            "graph": {
+              "height": 300.0
+            }
+          }
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eInspect Model Performance Using ML Practices (not normally done in PSM)\u003c/h3\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224411_968448316",
+      "dateCreated": "2021-05-29 22:44:11.000",
+      "dateStarted": "2021-05-29 22:56:16.000",
+      "dateFinished": "2021-05-29 22:56:16.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%r\n#Load R Libaries\nif(!require(pacman)) install.packages(\"pacman\"); require(pacman)\np_load(caret, data.table, e1071, Matching)\n",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:06:14.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "spark.r",
+          "profile": "r",
+          "isCustom": false,
+          "editorLanguage": "r",
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "results": [
+          {}
+        ],
+        "enabled": true,
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\n\n\n\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224446_339975927",
+      "dateCreated": "2021-05-29 22:44:46.000",
+      "dateStarted": "2021-06-01 01:03:09.000",
+      "dateFinished": "2021-06-01 01:06:14.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%r\ndata     \u003c- fread(\"lending_club_psm_jm.csv\")\ndrscores \u003c- fread(\"scored_results_60b4485d659b85d960180b32.csv\")\nlgscores \u003c- fread(\"logit_scored_file_no_target_jm.csv\")\ndf       \u003c- cbind(data, drscores)\n\ndf$dr_prediction    \u003c- df$Tr_1_PREDICTION\ndf$logit_prediction \u003c- lgscores$score\nhead(df)",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:22:51.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "spark.r",
+          "profile": "r",
+          "isCustom": false,
+          "editorLanguage": "r",
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\nhome_ownership annual_inc pymnt_plan addr_state total_acc Tr num_referrals\n1:           RENT      50000          n         NC         9  0             2\n2:           RENT      34200          n         IL        31  0             0\n3:           RENT      30000          n         FL         8  0             1\n4:       MORTGAGE      51000          n         NY        23  0             2\n5:           RENT      44004          n         CA        32  0             1\n6:           RENT      65500          n         GA        15  0             0\n   Tr_1_PREDICTION Tr_0_PREDICTION Tr_PREDICTION THRESHOLD POSITIVE_CLASS\n1:     0.004929825       0.9950702             0       0.5              1\n2:     0.004929825       0.9950702             0       0.5              1\n3:     0.005745331       0.9942547             0       0.5              1\n4:     0.006737336       0.9932627             0       0.5              1\n5:     0.004929825       0.9950702             0       0.5              1\n6:     0.004929825       0.9950702             0       0.5              1\n   dr_prediction logit_prediction\n1:   0.004929825      0.003266169\n2:   0.004929825      0.005177878\n3:   0.005745331      0.002592495\n4:   0.006737336      0.001801189\n5:   0.004929825      0.005880834\n6:   0.004929825      0.004526462\n\n\n\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210530-011413_1712322874",
+      "dateCreated": "2021-05-30 01:14:13.000",
+      "dateStarted": "2021-06-01 01:22:51.000",
+      "dateFinished": "2021-06-01 01:22:51.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eMatching with Both Traditional \u0026 DR Scores\u003c/b\u003e\u003c/h3\u003e",
+      "user": "",
+      "dateUpdated": "2021-05-30 01:33:35.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cp\u003e\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003e\u003cb\u003eMatching with Both Traditional \u0026amp; DR Scores\u003c/b\u003e\u003c/h3\u003e\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224533_1145475706",
+      "dateCreated": "2021-05-29 22:45:33.000",
+      "dateStarted": "2021-05-30 01:33:35.000",
+      "dateFinished": "2021-05-30 01:33:35.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%r\n\n# Logistic Regression PSM\nlogit        \u003c- Match(Y             \u003d df$num_referrals,\n                      Tr            \u003d df$Tr,\n                      X             \u003d df$logit_prediction, # Propensity Score from Logistic Reg.\n                      estimand      \u003d \"ATT\",\n                      M             \u003d 1, # Controls 1-to-1 vs many-to-1\n                      ties          \u003d F,\n                      replace       \u003d T,\n                      caliper       \u003d 0.01,\n                      CommonSupport \u003d T\n)\n\nsummary(logit)\n\n",
+      "user": "",
+      "dateUpdated": "2021-05-31 02:26:26.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "spark.r",
+          "profile": "r",
+          "isCustom": false,
+          "editorLanguage": "r",
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "editorHide": false,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\nEstimate…  0.91358 \nSE………  0.1513 \nT-stat…..  6.0381 \np.val……  1.5594e-09 \n\nOriginal number of observations…………..  9810 \nOriginal number of treated obs……………  292 \nMatched number of observations……………  162 \nMatched number of observations  (unweighted).  162 \n\nCaliper (SDs)………………………………….   0.01 \nNumber of obs dropped by \u0027exact\u0027 or \u0027caliper\u0027  130 \n\n\n\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224654_691660670",
+      "dateCreated": "2021-05-29 22:46:54.000",
+      "dateStarted": "2021-05-31 02:26:26.000",
+      "dateFinished": "2021-05-31 02:26:26.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%r\n# DataRobot PSM\nsummary(df$dr_prediction[df$Tr\u003d\u003d1])\nsummary(df$dr_prediction[df$Tr\u003d\u003d0])\n\ndrps         \u003c- Match(Y             \u003d df$num_referrals,\n                      Tr            \u003d df$Tr,\n                      X             \u003d df$dr_prediction, # Propensity Score from DR\n                      estimand      \u003d \"ATT\",\n                      M             \u003d 1, # Controls 1-to-1 vs many-to-1\n                      ties          \u003d T,\n                      replace       \u003d F,\n                      caliper       \u003d 2\n)\n\n\n# DataRobot\nsummary(drps)",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:27:46.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "spark.r",
+          "profile": "r",
+          "isCustom": false,
+          "editorLanguage": "r",
+          "className": "org.apache.zeppelin.spark.SparkRInterpreter",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\nMin.  1st Qu.   Median     Mean  3rd Qu.     Max. \n\n\n0.004441 0.990940 0.990940 0.822851 0.990940 0.990940 \n    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. \n0.001349 0.004930 0.005745 0.005562 0.006737 0.012601 \n\nEstimate…  0.78 \nSE………  0.27465 \nT-stat…..  2.84 \np.val……  0.0045115 \n\nOriginal number of observations…………..  9894 \nOriginal number of treated obs……………  293 \nMatched number of observations……………  50 \nMatched number of observations  (unweighted).  50 \n\nCaliper (SDs)………………………………….   2 \nNumber of obs dropped by \u0027exact\u0027 or \u0027caliper\u0027  243 \n\n\n\n",
+            "type": "TEXT"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210530-011624_380238973",
+      "dateCreated": "2021-05-30 01:16:24.000",
+      "dateStarted": "2021-06-01 01:27:46.000",
+      "dateFinished": "2021-06-01 01:27:46.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003cb\u003eBusiness Interpretation\u003c/b\u003e\u003c/h3\u003e",
+      "user": "",
+      "dateUpdated": "2021-05-30 01:38:04.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003cp\u003e\u003ch3 style\u003d\"background-color: black; color: white; text-align: center\"\u003cb\u003eBusiness Interpretation\u003c/b\u003e\u003c/h3\u003e\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-224929_348162110",
+      "dateCreated": "2021-05-29 22:49:29.000",
+      "dateStarted": "2021-05-30 01:38:04.000",
+      "dateFinished": "2021-05-30 01:38:04.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n\n### Assigning Dollar Values \n\nTreatment and the outcome (\"num_referrals\") in this demo were synthetic, simulated data wherein the effect of treatment was defined as 0.75. The pilot run of the treatment marketing campaign involved 293 customers. \n\nValue of a referral: $900 per referral.\n\nCost of treatment:   $800 per customer. \n\n",
+      "user": "",
+      "dateUpdated": "2021-06-01 01:45:50.000",
+      "config": {
+        "selectedInterpreter": {
+          "name": "md",
+          "profile": "md",
+          "isCustom": false,
+          "editorLanguage": "markdown",
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "isDefault": false
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch3\u003eAssigning Dollar Values\u003c/h3\u003e\n\n\u003cp\u003eTreatment and the outcome (\u0026ldquo;num_referrals\u0026rdquo;) in this demo were synthetic, simulated data wherein the effect of treatment was defined as 0.75. The pilot run of the treatment marketing campaign involved 293 customers.\u003c/p\u003e\n\n\u003cp\u003eValue of a referral: $900 per referral.\u003c/p\u003e\n\n\u003cp\u003eCost of treatment:   $800 per customer.\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210529-225117_1170759547",
+      "dateCreated": "2021-05-29 22:51:17.000",
+      "dateStarted": "2021-06-01 01:45:50.000",
+      "dateFinished": "2021-06-01 01:45:50.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    },
+    {
+      "title": "",
+      "text": "%md\n## DataRobot saved $1.24 Million Dollars\n\nTrue value of treatment per customer: -$125 \u003d (0.75 * 900 dollar value of a referral) - 800 treatment cost\n\nRelying on a Logistic Regression would lead Lending Club to roll out the marketing campaign to all customers. This would cost the company $1,236,750 (-125 * 9,894 customers). By using DataRobot to get better results, the company avoided this catastrophic loss.",
+      "user": "",
+      "dateUpdated": "2021-06-01 02:11:52.000",
+      "config": {
+        "selectedInterpreter": {
+          "className": "org.apache.zeppelin.markdown.Markdown",
+          "editorLanguage": "markdown",
+          "isCustom": false,
+          "isDefault": false,
+          "name": "md",
+          "profile": "md"
+        },
+        "colWidth": 12.0,
+        "editorHide": true,
+        "results": [
+          {}
+        ],
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "data": "\u003ch2\u003eDataRobot saved $1.24 Million Dollars\u003c/h2\u003e\n\n\u003cp\u003eTrue value of treatment per customer: -$125 \u003d (0.75 * 900 dollar value of a referral) - 800 treatment cost\u003c/p\u003e\n\n\u003cp\u003eRelying on a Logistic Regression would lead Lending Club to roll out the marketing campaign to all customers. This would cost the company $1,236,750 (-125 * 9,894 customers). By using DataRobot to get better results, the company avoided this catastrophic loss.\u003c/p\u003e\n",
+            "type": "HTML"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "",
+      "id": "20210601-015039_635149041",
+      "dateCreated": "2021-06-01 01:50:39.000",
+      "dateStarted": "2021-06-01 02:11:52.000",
+      "dateFinished": "2021-06-01 02:11:52.000",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 0
+    }
+  ],
+  "name": "PSM Demo 2:  Logistic vs ML Profit Comparison",
+  "id": "c715fc6d3b12497791416f3ba3aa6a77",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {},
+  "info": {}
+}
