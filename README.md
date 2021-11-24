@@ -107,12 +107,6 @@ The list of exercises is as follows:
 
 - *Anti-Money Laundering with Outlier Detection:* Create an unsupervised model that can predict money-laundering related transactions. Use a small set of labeled data to evaluate how the different models can perform. ([Tutorial](https://community.datarobot.com/t5/resources/anti-money-laundering-with-outlier-detection/ta-p/8810) in DataRobot Community.)[Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Anomaly%20Detection%20(Unsupervised%20Learning)/Python/Anti%20Money%20Laundering%20with%20Outlier%20Detection/src/Anti%20Money%20Laundering%20with%20Outlier%20Detection.ipynb)
 
-### Integrations
-
-- *Amazon Web Services (AWS):*  This repository has a number of solutions for using DataRobot with AWS. Use DataRobot Prime and Scoring Code models with AWS Lambda. Also use DataRobot Scoring Code models with AWS SageMaker. [cURL](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/integrations/AWS%20(Amazon%20Web%20Services)/readme.md)
-
-- *Database Connections and Writebacks:* DataRobot provides a “self-service” JDBC product for database connectivity setup. Once configured, you can read data from production databases for model building and predictions. This allows you to quickly train and retrain models on that data, and avoids the unnecessary step of exporting data from your enterprise database to a CSV file for ingest to DataRobot. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/integrations/Database%20Connections%20and%20Writebacks/databases_and_deployment.ipynb)
-
 ### Feature Discovery
 
 - *Feature Discovery with Instacart Dataset:* An example of how to use Feature Discovery through the Python API. [Python](https://github.com/datarobot-community/tutorials-for-data-scientists/tree/master/Feature%20Discovery/Feature%20Discovery%20%20with%20Instacart%20Dataset)
