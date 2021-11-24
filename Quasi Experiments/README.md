@@ -2,8 +2,6 @@
 
 This repository contains copies of two Zepl notebooks used to demonstrate quasi-experimentation with DataRobot using Python and R. Propensity Score Matching (PSM) is the approach leveraged to conduct the quasi-experiments. This allows us to estimate treatment effects (i.e., causal inference) with less bias and greater accuracy than traditional regression modeling.
 
-For more information about PSM and the notebooks provided here, see the [accompanying article](https://community.datarobot.com/t5/blog/welcome-to-conducting-quasi-experiments-with-datarobot/ba-p/11757) in the DataRobot Community.
-
 ## Usage
 
 Make sure the required libraries are installed in your Zepl image (or in Python and R, if running directly). Python requires datarobot and pandas. R requires caret, e1071, and Matching. Code to install the R libraries are included in the R script and Zepl notebook; Python libraries can be installed with pip.
