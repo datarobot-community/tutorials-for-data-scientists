@@ -2,8 +2,6 @@
 
 In early March 2020 I wanted to forecast the spread of COVID-19. However, at that time the number of days since the first U.S. case of the virus was really too short to perform any reliable long-term forecasting; at most, I could forecast only two days ahead. While this may appear to be an issue, it can be solved by combining the new forecast with the historical time series to predict another, new forecast. The code here shows you how to do this by using Time Series support in the DataRobot R client package.
 
-See the [article](https://community.datarobot.com/t5/blog/forecasting-covid-19-reported-cases/ba-p/10141) in the DataRobot Community that accompanies my research and my code.
-
 ### Getting Started
 
 These instructions will get a copy of my project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
