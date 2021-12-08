@@ -2,7 +2,7 @@
 
 This repository contains various end-to-end use case examples using the DataRobot API. Each use case directory contains instructions for its own use.
 
-A simple example to get you started can be found [here](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Classification/Python/predict_hospital_readmissions/src/readmissions_tutorial.ipynb). Also executable through Google Colab.
+A simple example to get you started can be found [here](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Classification/Python/predict_hospital_readmissions/src/readmissions_tutorial.ipynb). The example can also be executed through Google Colab.
 
 ## Usage
 
