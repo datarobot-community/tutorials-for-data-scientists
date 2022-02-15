@@ -4,6 +4,14 @@ This repository contains various end-to-end use case examples using the DataRobo
 
 A simple example to get you started can be found [here](https://github.com/datarobot-community/tutorials-for-data-scientists/blob/master/Classification/Python/predict_hospital_readmissions/src/readmissions_tutorial.ipynb). The example can also be executed through Google Colab.
 
+Additional code examples can be accessed from the following locations:
+
+- [Examples for data scientists repo](https://github.com/datarobot-community/examples-for-data-scientists/)
+- [AI Engineering repo](https://github.com/datarobot-community/ai_engineering)
+- [docs.datarobot.com](https://docs.datarobot.com/en/docs/api/code-examples/index.html)
+- [R Vignettes included in the R client](https://cran.r-project.org/web/packages/datarobot/index.html)
+- [Examples included in the Python client](https://datarobot-public-api-client.readthedocs-hosted.com/en/v2.27.1/examples/index.html)
+
 ## Usage
 
 For each respective guide, follow the instructions in its own `.ipynb` or `.Rmd` file.
@@ -22,9 +30,8 @@ The DataRobot API Endpoint is used to connect your IDE to DataRobot.
 
 ## Important Links
 
-- To learn to use DataRobot, visit [DataRobot University](https://university.datarobot.com/).
-- For articles on using DataRobot, feature deep dives, and example workflows, visit [DataRobot Community](https://community.datarobot.com/).
-- For simple example scripts, visit [Examples for Data Scientists](https://github.com/datarobot-community/examples-for-data-scientists).
+- To learn how to use DataRobot and gain practical data science education, visit [DataRobot University](https://university.datarobot.com/)
+- To ask questions and get help from DataRobot experts and peers, visit [DataRobot Community](https://community.datarobot.com/)
 
 ## Contents
 
