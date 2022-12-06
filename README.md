@@ -1,3 +1,5 @@
+**Please note:** The code in these repos is sourced from the DataRobot user community and is not owned or maintained by DataRobot, Inc. You may need to make edits or updates for this code to function properly in your environment.
+
 # Tutorials for Data Scientists
 
 This repository contains various end-to-end use case examples using the DataRobot API. Each use case directory contains instructions for its own use.
